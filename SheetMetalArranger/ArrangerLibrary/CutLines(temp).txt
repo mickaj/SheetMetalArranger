@@ -1,0 +1,33 @@
+﻿                //step 2: determine which is shorter
+                if (vertical > horizontal)
+                {
+                    //step 3a: do the section vertically
+                    //first newly created container
+                    int newX = containers[bestFitContainerIndex].X;
+                    int newY = containers[bestFitContainerIndex].Y + items[0].Height;
+                    int newWidth = items[0].Width;
+                    int newHeight = containers[bestFitContainerIndex].Height - items[0].Height;
+                    containers.Add(new Container { X = newX, Y = newY, Height = newHeight, Width = newWidth });
+                    //second newly created container
+                    newX = containers[bestFitContainerIndex].X + items[0].Width;
+                    newY = containers[bestFitContainerIndex].Y;
+                    newWidth = containers[bestFitContainerIndex].Width - items[0].Width;
+                    newHeight = containers[bestFitContainerIndex].Height;
+                    containers.Add(new Container { X = newX, Y = newY, Height = newHeight, Width = newWidth });
+                }
+                else
+                {
+                    //step 3b: do the section horizontally
+                    //first newly created container
+                    int newX = containers[bestFitContainerIndex].X + items[0].Width;
+                    int newY = containers[bestFitContainerIndex].Y;
+                    int newWidth = containers[bestFitContainerIndex].Width - items[0].Width;
+                    int newHeight = items[0].Height;
+                    containers.Add(new Container { X = newX, Y = newY, Height = newHeight, Width = newWidth });
+                    //second newly created container
+                    newX = containers[bestFitContainerIndex].X;
+                    newY = containers[bestFitContainerIndex].Y + items[0].Height;
+                    newWidth = containers[bestFitContainerIndex].Width;
+                    newHeight = containers[bestFitContainerIndex].Height - items[0].Height;
+                    containers.Add(new Container { X = newX, Y = newY, Height = newHeight, Width = newWidth });
+                }
