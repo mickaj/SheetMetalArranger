@@ -1,0 +1,52 @@
+﻿                    //check if container can hold the item
+                    if ((items[0].Height <= containers[i].Height) && (items[0].Width <= containers[i].Width))
+                    {
+                        //if there is already a container proposed compare them which is better; if not assing it ot a container 
+                        if (bestFitContainerIndex >= 0)
+                        {
+                            float ratioCurrent = items[0].Area / containers[bestFitContainerIndex].Area;
+                            float ratioProposed = items[0].Area / containers[i].Area;
+                            //if proposed container has better ratio then assing the item to it
+                            if (ratioProposed > ratioCurrent)
+                            {
+                                bestFitContainerIndex = i;
+                            }
+                        }
+                        else
+                        {
+                            bestFitContainerIndex = i;
+                        }
+                    }
+                    else //rectangle merge
+                    {
+                        //rectangle merge can be applied only in case where only one dimension cannot fit in the container
+                        //rectangle merge can be applied only if exceeding part of an item would take bottom or top left part of second container 
+                        //the above is to avoid too much fragmentation of the containers
+                        //RM step 1: find which dimension exceeds the size of container
+                        if ((items[0].Height > containers[i].Height)&&(items[0].Width<=containers[i].Width))
+                        {
+                            //height is exceeded
+                            //check if there is a container available above
+                            for (int j=0; j <= containers.Count -1; j++)
+                            {
+                                //extra container can be used if:
+                                //1 - its X dimension is the same as initial container
+                                //2 - its Y diemnsion equals Y dimension + Height of initial container
+                                //3 - its height is enough to hold the item 
+                                if ((containers[j].X==containers[i].X)&&(containers[j].Y==containers[i].Y+containers[i].Height)&&(containers[i].Height+containers[j].Height<=items[0].Height))
+                                {
+                                    extraContainerIndex = j;
+                                }
+                            }
+                            //assign item to containers
+
+                        }
+                        else
+                        {
+                            if ((items[0].Height <= containers[i].Height) && (items[0].Width > containers[i].Width))
+                            {
+                                //width is exceeded
+                            }
+                        }
+                        //nothing happens if both are exceeded
+                    }
