@@ -12,6 +12,7 @@ namespace ArrangerLibraryTester
         static void Main(string[] args)
         {
             Arranger newArranger = new Arranger();
+
             newArranger.DisplayResults();
         }
     }

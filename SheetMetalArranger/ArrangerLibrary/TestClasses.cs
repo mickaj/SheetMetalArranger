@@ -8,12 +8,14 @@ namespace ArrangerLibrary
     {
         public Container MainContainer;
         public int ResultsIndex;
-        public float AreaRatio; 
+        public float AreaRatio;
     }
+
     public class ItemContainerPair
     {
         public Item Occupant { get; set; }
         public Container Occupied { get; set; }
+        public bool Rotated { get; set; }
 
         public ItemContainerPair(Item _item, Container _container)
         {
@@ -26,10 +28,10 @@ namespace ArrangerLibrary
     {
         List<Item> items = new List<Item>();
         List<Item> placedItems = new List<Item>();
+        List<Item> leftItems = new List<Item>();
         Dictionary<int,ArrangerResults> results = new Dictionary<int, ArrangerResults>();
         int sheetIndex = 0;
         IComparer<Item> comparer;
-
         public Arranger()
         {
             //initialize starting items
@@ -39,7 +41,8 @@ namespace ArrangerLibrary
             items.Add(new Item { Height = 4, Width = 3 });
             items.Add(new Item { Height = 3, Width = 5 });
             items.Add(new Item { Height = 5, Width = 2 });
-            results = Calculate(10, 13, 'a');
+            items.Add(new Item { Height = 10, Width = 10 });
+            results = Calculate(10, 10, 'a');
         }
 
         private Dictionary<int,ArrangerResults> Calculate(int _sheetHeight, int _sheetWidth, char _comparer)
@@ -89,7 +92,7 @@ namespace ArrangerLibrary
                             PossibleFit fit = new PossibleFit();
                             fit.MainContainer = thisContainer;
                             fit.ResultsIndex = result.Key;
-                            fit.AreaRatio = (float)currentItem.Area / (float)thisContainer.Area;
+                            fit.AreaRatio = (float)currentItem.Area / thisContainer.Area;
                             possibleFits.Add(fit);
                         }
                     }
@@ -104,21 +107,29 @@ namespace ArrangerLibrary
                     //perform section of used container
                     List<Container> newContainers = DoSection(possibleFits[0].MainContainer, currentItem, nextItem);
                     calculationResults[possibleFits[0].ResultsIndex].availableContainers.AddRange(newContainers);
+                    placedItems.Add(currentItem);
                 }
                 else //if none of all available containers can hold the item
                 {
-                    //create new result set - in practice in means that new sheet must be used
-                    ArrangerResults newResults = new ArrangerResults(_sheetHeight, _sheetWidth);
-                    calculationResults.Add(++sheetIndex, newResults);
-                    //place item in newly created result set
-                    Container usedContainer = calculationResults[sheetIndex].availableContainers[0];
-                    calculationResults[sheetIndex].Assign(currentItem, usedContainer);
-                    //perform section of used container
-                    List<Container> newContainers = DoSection(usedContainer, currentItem, nextItem);
-                    calculationResults[sheetIndex].availableContainers.AddRange(newContainers);
+                    if ((currentItem.Width<=_sheetWidth)&&(currentItem.Height<=_sheetHeight))
+                    {
+                        //create new result set - in practice in means that new sheet must be used
+                        ArrangerResults newResults = new ArrangerResults(_sheetHeight, _sheetWidth);
+                        calculationResults.Add(++sheetIndex, newResults);
+                        //place item in newly created result set
+                        Container usedContainer = calculationResults[sheetIndex].availableContainers[0];
+                        calculationResults[sheetIndex].Assign(currentItem, usedContainer);
+                        //perform section of used container
+                        List<Container> newContainers = DoSection(usedContainer, currentItem, nextItem);
+                        calculationResults[sheetIndex].availableContainers.AddRange(newContainers);
+                        placedItems.Add(currentItem);
+                    }
+                    else
+                    {
+                        leftItems.Add(currentItem);
+                    }
                 }
                 //at the end remove currently processed item from list of items
-                placedItems.Add(currentItem);
                 items.Remove(currentItem);
             } while (items.Count > 0);
             return calculationResults;
@@ -176,15 +187,18 @@ namespace ArrangerLibrary
                                  orderby pair.Value descending
                                  select pair;
                 ratioDict = ratioItems.ToDictionary<KeyValuePair<string, float>, string, float>(pair => pair.Key, pair => pair.Value);
-                if (ratioDict.ElementAt(0).Key[0] == 'V')
+                if (ratioDict.Count>0)
                 {
-                    sectionResults.Add(v1);
-                    sectionResults.Add(v2);
-                }
-                else
-                {
-                    sectionResults.Add(h1);
-                    sectionResults.Add(h2);
+                    if (ratioDict.ElementAt(0).Key[0] == 'V')
+                    {
+                        sectionResults.Add(v1);
+                        sectionResults.Add(v2);
+                    }
+                    else
+                    {
+                        sectionResults.Add(h1);
+                        sectionResults.Add(h2);
+                    }
                 }
             }
             return sectionResults;
@@ -213,6 +227,11 @@ namespace ArrangerLibrary
                     int y = j.Occupied.Y;
                     Console.WriteLine("Item size: {0}x{1}   |   Container: X={2}, Y={3}", w, h, x, y);
                 }
+            }
+            Console.WriteLine("Unassigned items:");
+            foreach (Item i in leftItems)
+            {
+                Console.WriteLine("Item size: {0}x{1}", i.Width, i.Height);
             }
         }
     }
