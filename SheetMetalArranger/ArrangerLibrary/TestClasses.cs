@@ -6,21 +6,36 @@ namespace ArrangerLibrary
 {
     class PossibleFit
     {
-        public Container MainContainer;
-        public int ResultsIndex;
-        public float AreaRatio;
+        public Container MainContainer { get; set; }
+        public int ResultsIndex { get; set; }
+        public float AreaRatio { get; set; }
     }
 
     public class ItemContainerPair
     {
-        public Item Occupant { get; set; }
-        public Container Occupied { get; set; }
-        public bool Rotated { get; set; }
+        private Item occupant;
+        private Container occupied;
+
+        public Item Occupant
+        {
+            get
+            {
+                return occupant; 
+            }
+        }
+
+        public Container Occupied
+        {
+            get
+            {
+                return occupied;
+            }
+        }
 
         public ItemContainerPair(Item _item, Container _container)
         {
-            Occupant = _item;
-            Occupied = _container;
+            occupant = _item;
+            occupied = _container;
         }
     }
 
@@ -31,18 +46,17 @@ namespace ArrangerLibrary
         List<Item> leftItems = new List<Item>();
         Dictionary<int,ArrangerResults> results = new Dictionary<int, ArrangerResults>();
         int sheetIndex = 0;
-        IComparer<Item> comparer;
+        private IComparer<Item> comparer;
         public Arranger()
         {
             //initialize starting items
-            items.Add(new Item { Height = 5, Width = 3 });
-            items.Add(new Item { Height = 3, Width = 3 });
-            items.Add(new Item { Height = 1, Width = 5 });
-            items.Add(new Item { Height = 4, Width = 3 });
-            items.Add(new Item { Height = 3, Width = 5 });
-            items.Add(new Item { Height = 5, Width = 2 });
-            items.Add(new Item { Height = 10, Width = 10 });
-            results = Calculate(10, 10, 'a');
+            items.Add(new Item { Height = 500, Width = 300 });
+            items.Add(new Item { Height = 300, Width = 300 });
+            items.Add(new Item { Height = 100, Width = 500 });
+            items.Add(new Item { Height = 400, Width = 300 });
+            items.Add(new Item { Height = 300, Width = 500 });
+            items.Add(new Item { Height = 500, Width = 200 });
+            results = Calculate(1000, 1500, 'l');
         }
 
         private Dictionary<int,ArrangerResults> Calculate(int _sheetHeight, int _sheetWidth, char _comparer)
@@ -52,18 +66,7 @@ namespace ArrangerLibrary
             ArrangerResults initialResults = new ArrangerResults(_sheetHeight, _sheetWidth);
             calculationResults.Add(sheetIndex, initialResults);
             //initialize comparer
-            comparer = new ItemAreaComparer();
-            if ((_comparer == 'H') || (_comparer == 'h'))
-            {
-                comparer = new ItemHeightComparer();
-            }
-            else
-            {
-                if ((_comparer == 'W') || (_comparer == 'w'))
-                {
-                    comparer = new ItemWidthComparer();
-                }
-            }
+            comparer = SetComparer(_comparer);
             do
             {
                 //sort items with selected comparer and revers order
@@ -195,7 +198,7 @@ namespace ArrangerLibrary
                         sectionResults.Add(v2);
                     }
                     else
-                    {
+                    { 
                         sectionResults.Add(h1);
                         sectionResults.Add(h2);
                     }
@@ -227,11 +230,48 @@ namespace ArrangerLibrary
                     int y = j.Occupied.Y;
                     Console.WriteLine("Item size: {0}x{1}   |   Container: X={2}, Y={3}", w, h, x, y);
                 }
+                Console.WriteLine("Utilisation ratio: {0}",i.Value.UtilisationRatio);
             }
             Console.WriteLine("Unassigned items:");
             foreach (Item i in leftItems)
             {
                 Console.WriteLine("Item size: {0}x{1}", i.Width, i.Height);
+            }
+        }
+
+        private IComparer<Item> SetComparer(char _comparer)
+        {
+            IComparer<Item> comparerToSet = new ItemAreaComparer();
+            if ((_comparer == 'H') || (_comparer == 'h'))
+            {
+                comparerToSet = new ItemHeightComparer();
+            }
+            else
+            {
+                if ((_comparer == 'W') || (_comparer == 'w'))
+                {
+                    comparerToSet = new ItemWidthComparer();
+                }
+                else
+                {
+                    if ((_comparer == 'L') || (_comparer == 'l'))
+                    {
+                        comparerToSet = new ItemLongerEdgeComparer();
+                    }
+                }
+            }
+            return comparerToSet;
+        }
+
+        public ArrangerResults GetResultsByIndex(int _index)
+        {
+            if((results.Count>_index)&&(_index >= 0))
+            {
+                return results[_index];
+            }
+            else
+            {
+                return null;
             }
         }
     }
