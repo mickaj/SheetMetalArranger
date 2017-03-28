@@ -56,7 +56,7 @@ namespace ArrangerLibrary
             items.Add(new Item { Height = 400, Width = 300 });
             items.Add(new Item { Height = 300, Width = 500 });
             items.Add(new Item { Height = 500, Width = 200 });
-            results = Calculate(1000, 1500, 'l');
+            results = Calculate(1000, 1500, 'w');
         }
 
         private Dictionary<int,ArrangerResults> Calculate(int _sheetHeight, int _sheetWidth, char _comparer)

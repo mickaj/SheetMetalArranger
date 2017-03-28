@@ -1,147 +1,53 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ArrangerLibrary
 {
-    public class Item
+    public interface IRectangle
     {
-        public int Height { get; set; }
-        public int Width { get; set; }
-        public int Area
+        uint Width { get; set; }
+        uint Height { get; set; }
+        uint Area { get; }
+        uint LongerEdge { get; }
+    }
+
+    public class Item : IRectangle
+    {
+        private uint width;
+        public uint Width
+        {
+            get { return width; }
+            set { width = value; }
+        }
+
+        private uint height;
+        public uint Height
+        {
+            get { return height; }
+            set { height = value; }
+        }
+
+        public uint Area
+        {
+            get { return height * width; }
+        }
+
+        public uint LongerEdge
         {
             get
             {
-                return Height * Width;
+                if(width>height) { return width; }
+                else { return height; }
             }
         }
-        public int LongerEdge
-        {
-            get
-            {
-                if (Width >= Height)
-                {
-                    return Width;
-                }
-                else
-                {
-                    return Height;
-                }
-            }
-        }
-    }
 
-    public class ItemAreaComparer : IComparer<Item>
-    {
-        public int Compare(Item _item1, Item _item2)
+        public Item(uint _height, uint _width)
         {
-            if (_item1 == null)
-            {
-                if (_item2 == null)
-                {
-                    // If x is null and y is null, they're
-                    // equal. 
-                    return 0;
-                }
-                else
-                {
-                    // If x is null and y is not null, y
-                    // is greater. 
-                    return -1;
-                }
-            }
-            else
-            {
-                // ...and y is not null, compare the 
-                // lengths of the two strings.
-                //
-                return (_item1.Area.CompareTo(_item2.Area));
-            }
-        }
-    }
-
-    public class ItemHeightComparer : IComparer<Item>
-    {
-        public int Compare(Item _item1, Item _item2)
-        {
-            if (_item1 == null)
-            {
-                if (_item2 == null)
-                {
-                    // If x is null and y is null, they're
-                    // equal. 
-                    return 0;
-                }
-                else
-                {
-                    // If x is null and y is not null, y
-                    // is greater. 
-                    return -1;
-                }
-            }
-            else
-            {
-                // ...and y is not null, compare the 
-                // lengths of the two strings.
-                //
-                return (_item1.Height.CompareTo(_item2.Height));
-            }
-        }
-    }
-
-    public class ItemWidthComparer : IComparer<Item>
-    {
-        public int Compare(Item _item1, Item _item2)
-        {
-            if (_item1 == null)
-            {
-                if (_item2 == null)
-                {
-                    // If x is null and y is null, they're
-                    // equal. 
-                    return 0;
-                }
-                else
-                {
-                    // If x is null and y is not null, y
-                    // is greater. 
-                    return -1;
-                }
-            }
-            else
-            {
-                // ...and y is not null, compare the 
-                // lengths of the two strings.
-                //
-                return (_item1.Width.CompareTo(_item2.Width));
-            }
-        }
-    }
-
-    public class ItemLongerEdgeComparer : IComparer<Item>
-    {
-        public int Compare(Item _item1, Item _item2)
-        {
-            if (_item1 == null)
-            {
-                if (_item2 == null)
-                {
-                    // If x is null and y is null, they're
-                    // equal. 
-                    return 0;
-                }
-                else
-                {
-                    // If x is null and y is not null, y
-                    // is greater. 
-                    return -1;
-                }
-            }
-            else
-            {
-                // ...and y is not null, compare the 
-                // lengths of the two strings.
-                //
-                return (_item1.LongerEdge.CompareTo(_item2.LongerEdge));
-            }
+            width = _width;
+            height = _height;
         }
     }
 }

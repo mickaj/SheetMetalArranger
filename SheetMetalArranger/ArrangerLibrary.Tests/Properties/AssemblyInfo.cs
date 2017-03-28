@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ArrangerLibrary")]
+[assembly: AssemblyTitle("ArrangerLibrary.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ArrangerLibrary")]
+[assembly: AssemblyProduct("ArrangerLibrary.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ac227112-ac8d-4f76-a11d-2e0e7ea4ef6f")]
+[assembly: Guid("7dceb27b-fc4a-435a-8b11-7084f40b66d2")]
 
 // Version information for an assembly consists of the following four values:
 //
