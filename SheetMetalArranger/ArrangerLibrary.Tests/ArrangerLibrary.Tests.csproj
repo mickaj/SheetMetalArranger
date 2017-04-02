@@ -55,9 +55,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContainerDivider.Test.cs" />
+    <Compile Include="ArrangerResultTester.cs" />
+    <Compile Include="ContainerDividerTester.cs" />
     <Compile Include="ContainerTester.cs" />
+    <Compile Include="ItemNesterTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReturnTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

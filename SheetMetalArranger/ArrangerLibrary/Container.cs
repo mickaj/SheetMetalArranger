@@ -43,8 +43,8 @@ namespace ArrangerLibrary
         private uint height;
         public uint Height
         {
-            get { return posY; }
-            set { posY = value; }
+            get { return height; }
+            set { height = value; }
         }
 
         public uint Area
