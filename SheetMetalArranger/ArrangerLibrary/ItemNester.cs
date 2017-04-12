@@ -50,14 +50,14 @@ namespace ArrangerLibrary
             sheetWidth = _width;
         }
 
-        public Dictionary<uint, IArrangerResult> Calculate(SortCondition _condition)
+        public Dictionary<uint, IArrangerResult> Calculate(SortCondition _sortCondition, SortCondition _sectionCondition)
         {
             //initialize first set of results
             Dictionary<uint, IArrangerResult> calculationResults = new Dictionary<uint, IArrangerResult>();
             ArrangerResult initialResults = new ArrangerResult(sheetHeight, sheetWidth);
             calculationResults.Add(sheetIndex, initialResults);
             //initialize comparer
-            comparer = SetComparer(_condition);
+            comparer = SetComparer(_sortCondition);
             do
             {
                 //sort items with selected comparer and revers order
@@ -100,9 +100,16 @@ namespace ArrangerLibrary
                     calculationResults[possibleFits[0].ResultsIndex].Assign(currentItem, possibleFits[0].MainContainer);
                     //perform section of used container
                     IContainerDivider currentSection = new ContainerDivider(possibleFits[0].MainContainer, currentItem);
-                    List<IContainer> newContainers = currentSection.Section(_condition);
+                    List<IContainer> newContainers = currentSection.Section(_sectionCondition);
                     calculationResults[possibleFits[0].ResultsIndex].AddContainers(newContainers);
                     placedItems.Add(currentItem);
+                    //perform merging of containers in current calculation results
+                    //perform merging
+                    IMergeRects merger = new Merger();
+                    List<IContainer> buffer = new List<IContainer>();
+                    buffer.AddRange(calculationResults[possibleFits[0].ResultsIndex].GetAvailableContainers());
+                    calculationResults[possibleFits[0].ResultsIndex].ClearAvailableContainers();
+                    calculationResults[possibleFits[0].ResultsIndex].AddContainers(merger.GetMerged(buffer));
                 }
                 else //if none of all available containers can hold the item
                 {
@@ -115,9 +122,9 @@ namespace ArrangerLibrary
                         IContainer usedContainer = calculationResults[sheetIndex].GetAvailableContainerByIndex(0);
                         calculationResults[sheetIndex].Assign(currentItem, usedContainer);
                         //perform section of used container
-                        IContainerDivider currentSection = new ContainerDivider(possibleFits[0].MainContainer, currentItem);
-                        List<IContainer> newContainers = currentSection.Section(_condition);
-                        calculationResults[possibleFits[0].ResultsIndex].AddContainers(newContainers);
+                        IContainerDivider currentSection = new ContainerDivider(usedContainer, currentItem);
+                        List<IContainer> newContainers = currentSection.Section(_sectionCondition);
+                        calculationResults[sheetIndex].AddContainers(newContainers);
                         placedItems.Add(currentItem);
                     }
                     else
@@ -153,6 +160,41 @@ namespace ArrangerLibrary
         public void AddItem(IRectangle _item)
         {
             items.Add(_item);
+        }
+
+        public string StringOutput()
+        {
+            string output = "NESTER OUTPUT:";
+            output +="\nUnassinged items: "+items.Count;
+            output +="\nAssigned items: "+placedItems.Count;
+            int usedContainers = 0;
+            foreach (KeyValuePair<uint, IArrangerResult> res in results)
+            {
+                usedContainers += res.Value.UsedContainersCount;
+            }
+            output +="\nUsed containers: "+usedContainers;
+            output +="\nUsed sheets: "+results.Count;
+            output +="\nItems: ";
+            foreach (KeyValuePair<uint, IArrangerResult> i in results)
+            {
+                output +="\nSheet No: "+i.Key;
+                List<KeyValuePair<IRectangle, IContainer>> assignments = i.Value.GetAssignments();
+                foreach(KeyValuePair<IRectangle,IContainer> j in assignments)
+                { 
+                    uint w = j.Key.Width;
+                    uint h = j.Key.Height;
+                    uint x = j.Value.PosX;
+                    uint y = j.Value.PosY;
+                    output +="\nItem size: "+h+"x"+w+"   |   Container: X="+x+", Y="+y;
+                }
+                output +="\nUtilisation ratio: "+i.Value.UtilisationRatio;
+            }
+            output +="\nUnassigned items:";
+            foreach (Item i in leftItems)
+            {
+                output +="\nItem size: "+i.Width+"x"+i.Height;
+            }
+            return output;
         }
     }
 }

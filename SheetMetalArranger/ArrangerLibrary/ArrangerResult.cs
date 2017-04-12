@@ -8,12 +8,17 @@ namespace ArrangerLibrary
         uint SheetWidth { get; }
         float UtilisationRatio { get; }
         int AvailableContainersCount { get; }
+        int UsedContainersCount { get; }
+        int AssignmentCount { get; }
 
         void AddContainer(IContainer _container);
         void AddContainers(List<IContainer> _containers);
         void MoveToUsed(IContainer _container);
         void Assign(IRectangle _item, IContainer _container);
         IContainer GetAvailableContainerByIndex(int _index);
+        List<KeyValuePair<IRectangle, IContainer>> GetAssignments();
+        List<IContainer> GetAvailableContainers();
+        void ClearAvailableContainers();
     }
 
     public class ArrangerResult : IArrangerResult
@@ -75,6 +80,16 @@ namespace ArrangerLibrary
             get { return availableContainers.Count; }
         }
 
+        public int UsedContainersCount
+        {
+            get { return usedContainers.Count; }
+        }
+
+        public int AssignmentCount
+        {
+            get { return assignments.Count; }
+        }
+
         public ArrangerResult(uint _height, uint _width)
         {
             assignments = new List<ItemContainerPair>();
@@ -116,6 +131,27 @@ namespace ArrangerLibrary
         public IContainer GetAvailableContainerByIndex(int _index)
         {
             return availableContainers[_index];
+        }
+
+        public List<KeyValuePair<IRectangle,IContainer>> GetAssignments()
+        {
+            List<KeyValuePair<IRectangle, IContainer>> result = new List<KeyValuePair<IRectangle, IContainer>>();
+            foreach (ItemContainerPair i in assignments)
+            {
+                KeyValuePair<IRectangle, IContainer> j = new KeyValuePair<IRectangle, IContainer>(i.Occupant, i.Occupied);
+                result.Add(j);
+            }
+            return result;
+        }
+
+        public List<IContainer> GetAvailableContainers()
+        {
+            return availableContainers;
+        }
+
+        public void ClearAvailableContainers()
+        {
+            availableContainers.Clear();
         }
         #endregion
     }
