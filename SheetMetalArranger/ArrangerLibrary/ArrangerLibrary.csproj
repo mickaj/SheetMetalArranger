@@ -40,14 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrangerResult.cs" />
-    <Compile Include="Container.cs" />
-    <Compile Include="ContainerDivider.cs" />
+    <Compile Include="Abstractions\IBatch.cs" />
+    <Compile Include="Abstractions\IBox.cs" />
+    <Compile Include="Abstractions\IItem.cs" />
+    <Compile Include="Abstractions\IPanel.cs" />
+    <Compile Include="Abstractions\ISector.cs" />
+    <Compile Include="Batch.cs" />
+    <Compile Include="Box.cs" />
+    <Compile Include="IItemComparers.cs" />
     <Compile Include="Item.cs" />
-    <Compile Include="ItemNester.cs" />
-    <Compile Include="MergeRects.cs" />
+    <Compile Include="Panel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities.cs" />
+    <Compile Include="Sectors.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Class diagram\ClassDiagram1.cd" />
+    <None Include="Class diagram\Design.xlsx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

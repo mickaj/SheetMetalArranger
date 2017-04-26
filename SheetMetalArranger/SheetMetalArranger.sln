@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrangerLibrary", "ArrangerLibrary\ArrangerLibrary.csproj", "{AC227112-AC8D-4F76-A11D-2E0E7EA4EF6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrangerLibrary.Tests", "ArrangerLibrary.Tests\ArrangerLibrary.Tests.csproj", "{7DCEB27B-FC4A-435A-8B11-7084F40B66D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArrangerLibrary", "ArrangerLibrary", "{A5A24551-328C-4BA8-8403-68B8422CA72F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +26,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC227112-AC8D-4F76-A11D-2E0E7EA4EF6F} = {A5A24551-328C-4BA8-8403-68B8422CA72F}
+		{7DCEB27B-FC4A-435A-8B11-7084F40B66D2} = {A5A24551-328C-4BA8-8403-68B8422CA72F}
 	EndGlobalSection
 EndGlobal

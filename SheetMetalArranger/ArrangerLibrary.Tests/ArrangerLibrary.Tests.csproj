@@ -55,15 +55,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrangerResultTester.cs" />
-    <Compile Include="ContainerDividerTester.cs" />
-    <Compile Include="ContainerTester.cs" />
-    <Compile Include="ItemNesterTester.cs" />
-    <Compile Include="MergerTester.cs" />
+    <Compile Include="Batch.Tests.cs" />
+    <Compile Include="Box.Tests.cs" />
+    <Compile Include="Item.Tests.cs" />
+    <Compile Include="ItemComparers.Tests.cs" />
+    <Compile Include="Panel.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReturnTest.cs" />
+    <Compile Include="Sectors.Tests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -81,7 +82,5 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props'))" />
-    <Error Condition="!Exists('..\packages\xunit.runner.wpf.1.0.14\build\xunit.runner.wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.wpf.1.0.14\build\xunit.runner.wpf.targets'))" />
   </Target>
-  <Import Project="..\packages\xunit.runner.wpf.1.0.14\build\xunit.runner.wpf.targets" Condition="Exists('..\packages\xunit.runner.wpf.1.0.14\build\xunit.runner.wpf.targets')" />
 </Project>

@@ -1,53 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ArrangerLibrary.Abstractions;
 
 namespace ArrangerLibrary
 {
-    public interface IRectangle
+    public class Item : IItem
     {
-        uint Width { get; set; }
-        uint Height { get; set; }
-        uint Area { get; }
-        uint LongerEdge { get; }
-    }
+        public int ItemHeight { get; set; }
+        public int ItemWidth { get; set; }
+        public int Margin { get; set; }
+        public bool Rotatable { get; set; }
 
-    public class Item : IRectangle
-    {
-        private uint width;
-        public uint Width
+        public int Height
         {
-            get { return width; }
-            set { width = value; }
+            get { return ItemHeight + 2 * Margin; }
         }
 
-        private uint height;
-        public uint Height
+        public int Width
         {
-            get { return height; }
-            set { height = value; }
+            get { return ItemWidth + 2 * Margin; }
         }
 
-        public uint Area
+        public int Area
         {
-            get { return height * width; }
+            get { return Height * Width; }
         }
 
-        public uint LongerEdge
+        public Item(int _height, int _width, int _margin, bool _rotation)
         {
-            get
-            {
-                if(width>height) { return width; }
-                else { return height; }
-            }
+            ItemHeight = _height;
+            ItemWidth = _width;
+            Margin = _margin;
+            Rotatable = _rotation;
         }
 
-        public Item(uint _height, uint _width)
+        public Item(int _height, int _width, int _margin)
         {
-            width = _width;
-            height = _height;
+            ItemHeight = _height;
+            ItemWidth = _width;
+            Margin = _margin;
+            Rotatable = false;
+        }
+
+        public Item(int _height, int _width)
+        {
+            ItemHeight = _height;
+            ItemWidth = _width;
+            Margin = 0;
+            Rotatable = false;
+        }
+
+        public IItem CreateCopy()
+        {
+            Item copy = new Item(ItemHeight, ItemWidth, Margin, Rotatable);
+            return copy;
         }
     }
 }
