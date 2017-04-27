@@ -8,6 +8,9 @@ namespace ArrangerLibrary
     {
         private static readonly ItemHeightComparer instance = new ItemHeightComparer();
 
+        private ItemHeightComparer()
+        { }
+
         public static ItemHeightComparer Instance
         {
             get { return instance; }
@@ -31,6 +34,9 @@ namespace ArrangerLibrary
     public sealed class ItemWidthComparer : IComparer<IItem>
     {
         private static readonly ItemWidthComparer instance = new ItemWidthComparer();
+
+        private ItemWidthComparer()
+        { }
 
         public static ItemWidthComparer Instance
         {
@@ -56,6 +62,9 @@ namespace ArrangerLibrary
     {
         private static readonly ItemAreaComparer instance = new ItemAreaComparer();
 
+        private ItemAreaComparer()
+        { }
+
         public static ItemAreaComparer Instance
         {
             get { return instance; }
@@ -80,6 +89,9 @@ namespace ArrangerLibrary
     {
         private static readonly ItemEquality instance = new ItemEquality();
 
+        private ItemEquality()
+        { }
+
         public static ItemEquality Instance
         {
             get
@@ -98,7 +110,7 @@ namespace ArrangerLibrary
 
         public int GetHashCode(IItem obj)
         {
-            throw new NotImplementedException();
+            return obj.GetHashCode();
         }
 
     }

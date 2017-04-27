@@ -8,6 +8,9 @@ namespace ArrangerLibrary
     {
         private static readonly HSector instance = new HSector();
 
+        private HSector()
+        { }
+
         public static HSector Instance
         {
             get { return instance; }
@@ -42,6 +45,9 @@ namespace ArrangerLibrary
     public sealed class VSector : ISector
     {
         private static readonly VSector instance = new VSector();
+
+        private VSector()
+        { }
 
         public static VSector Instance
         {
