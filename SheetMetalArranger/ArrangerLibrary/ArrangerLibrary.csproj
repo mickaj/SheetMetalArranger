@@ -47,6 +47,7 @@
     <Compile Include="Abstractions\ISector.cs" />
     <Compile Include="Batch.cs" />
     <Compile Include="Box.cs" />
+    <Compile Include="IBoxComparers.cs" />
     <Compile Include="IItemComparers.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Panel.cs" />
