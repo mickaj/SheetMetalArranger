@@ -10,6 +10,9 @@ namespace ArrangerLibrary
         private ItemHeightComparer()
         { }
 
+        static ItemHeightComparer()
+        { }
+
         public static ItemHeightComparer Instance
         {
             get { return instance; }
@@ -35,6 +38,9 @@ namespace ArrangerLibrary
         private static readonly ItemWidthComparer instance = new ItemWidthComparer();
 
         private ItemWidthComparer()
+        { }
+
+        static ItemWidthComparer()
         { }
 
         public static ItemWidthComparer Instance
@@ -64,6 +70,9 @@ namespace ArrangerLibrary
         private ItemAreaComparer()
         { }
 
+        static ItemAreaComparer()
+        { }
+
         public static ItemAreaComparer Instance
         {
             get { return instance; }
@@ -89,6 +98,9 @@ namespace ArrangerLibrary
         private static readonly ItemEquality instance = new ItemEquality();
 
         private ItemEquality()
+        { }
+
+        static ItemEquality()
         { }
 
         public static ItemEquality Instance

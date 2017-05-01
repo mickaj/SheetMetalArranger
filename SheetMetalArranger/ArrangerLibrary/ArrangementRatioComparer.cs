@@ -3,14 +3,17 @@ using ArrangerLibrary.Abstractions;
 
 namespace ArrangerLibrary
 {
-    public sealed class IArrangementRatioComparer : IComparer<IArrangement>
+    public sealed class ArrangementRatioComparer : IComparer<IArrangement>
     {
-        private static readonly IArrangementRatioComparer instance = new IArrangementRatioComparer();
+        private static readonly ArrangementRatioComparer instance = new ArrangementRatioComparer();
 
-        private IArrangementRatioComparer()
+        private ArrangementRatioComparer()
         { }
 
-        public static IArrangementRatioComparer Instance
+        static ArrangementRatioComparer()
+        { }
+
+        public static ArrangementRatioComparer Instance
         {
             get { return instance; }
         }

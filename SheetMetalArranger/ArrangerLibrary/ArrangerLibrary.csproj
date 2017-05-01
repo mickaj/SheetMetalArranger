@@ -49,7 +49,7 @@
     <Compile Include="Abstractions\IPanel.cs" />
     <Compile Include="Abstractions\ISector.cs" />
     <Compile Include="Arrangement.cs" />
-    <Compile Include="IArrangementRatioComparer.cs" />
+    <Compile Include="ArrangementRatioComparer.cs" />
     <Compile Include="Assignment.cs" />
     <Compile Include="Batch.cs" />
     <Compile Include="Box.cs" />

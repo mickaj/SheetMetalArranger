@@ -10,6 +10,9 @@ namespace ArrangerLibrary
         private BoxHeightComparer()
         { }
 
+        static BoxHeightComparer()
+        { }
+
         public static BoxHeightComparer Instance
         {
             get { return instance; }
@@ -35,6 +38,9 @@ namespace ArrangerLibrary
         private static readonly BoxWidthComparer instance = new BoxWidthComparer();
 
         private BoxWidthComparer()
+        { }
+
+        static BoxWidthComparer()
         { }
 
         public static BoxWidthComparer Instance
@@ -64,6 +70,9 @@ namespace ArrangerLibrary
         private BoxAreaComparer()
         { }
 
+        static BoxAreaComparer()
+        { }
+
         public static BoxAreaComparer Instance
         {
             get { return instance; }
@@ -89,6 +98,9 @@ namespace ArrangerLibrary
         private static readonly BoxEquality instance = new BoxEquality();
 
         private BoxEquality()
+        { }
+
+        static BoxEquality()
         { }
 
         public static BoxEquality Instance

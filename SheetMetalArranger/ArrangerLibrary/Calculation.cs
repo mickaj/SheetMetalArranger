@@ -149,7 +149,7 @@ namespace ArrangerLibrary
         public string OutputBest()
         {
             string output = "BEST RESULT: \n";
-            arrangements.Sort(IArrangementRatioComparer.Instance);
+            arrangements.Sort(ArrangementRatioComparer.Instance);
             IArrangement arr = arrangements[0];
             int panelNo = 1;
             output += String.Format("--------------------------------------\n***Utilisation: {0}***\n",arr.Utilisation);
