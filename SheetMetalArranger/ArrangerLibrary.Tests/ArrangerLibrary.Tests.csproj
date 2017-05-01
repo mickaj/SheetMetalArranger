@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Batch.Tests.cs" />
     <Compile Include="Box.Tests.cs" />
+    <Compile Include="Calculation.Tests.cs" />
     <Compile Include="Item.Tests.cs" />
     <Compile Include="ItemComparers.Tests.cs" />
     <Compile Include="Panel.Tests.cs" />

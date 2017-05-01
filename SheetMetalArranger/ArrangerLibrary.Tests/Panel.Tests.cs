@@ -45,7 +45,7 @@ namespace ArrangerLibrary.Tests
             panel = new Panel(1000, 2000);
             IBox newBox = new Box(10, 10, 10, 10);
             IItem newItem = new Item(10, 10, 10);
-            Assert.Throws<InvalidOperationException>(() => panel.Assign(newBox, newItem, HSector.Instance));
+            Assert.Throws<InvalidOperationException>(() => panel.Assign(newBox, newItem, HSector.Instance, false));
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace ArrangerLibrary.Tests
             panel = new Panel(1000, 2000);
             IItem itm = new Item(1000, 2000);
             IBox box = panel.GetBox(0);
-            panel.Assign(box, itm, HSector.Instance);
+            panel.Assign(box, itm, HSector.Instance, false);
             Assert.Equal(0, panel.AvailableBoxes);
             Assert.Equal(1, panel.Utilisation);
         }
@@ -65,7 +65,7 @@ namespace ArrangerLibrary.Tests
             panel = new Panel(1000, 2000);
             IItem itm = new Item(765, 1648);
             IBox box = panel.GetBox(0);
-            panel.Assign(box, itm, VSector.Instance);
+            panel.Assign(box, itm, VSector.Instance, false);
             Assert.Equal(2, panel.AvailableBoxes);
             Assert.InRange<double>(panel.Utilisation, 0, 1);
             string utl = panel.Utilisation.ToString("N3");
@@ -79,18 +79,18 @@ namespace ArrangerLibrary.Tests
             panel = new Panel(5, 5);
             IItem i2x2 = new Item(2, 2);
             IItem i2x3 = new Item(2, 3);
-            panel.Assign(panel.GetBox(0), i2x2, VSector.Instance);
+            panel.Assign(panel.GetBox(0), i2x2, VSector.Instance, false);
             IBox box = new Box(0, 0, 0, 0);
             //List<IBox> boxes = new List<IBox>(panel.GetBoxes());
             foreach (IBox b in panel.GetBoxes())
             {
-                if (b.CanHold(i2x3)) { box = b; }
+                if ((b.CanHold(i2x3)==1)||(b.CanHold(i2x3)==2)) { box = b; }
                 output.WriteLine("Box[{0}] H={1} W={2} X={3} Y={4}", panel.GetBoxes().IndexOf(b), b.Height, b.Width, b.PosX, b.PosY);
             }
-            panel.Assign(box, i2x3, HSector.Instance);
+            panel.Assign(box, i2x3, HSector.Instance, false);
             foreach (IBox b in panel.GetBoxes())
             {
-                if (b.CanHold(i2x3)) { box = b; }
+                if ((b.CanHold(i2x3) == 1) || (b.CanHold(i2x3) == 2)) { box = b; }
                 output.WriteLine("Box[{0}] H={1} W={2} X={3} Y={4}", panel.GetBoxes().IndexOf(b), b.Height, b.Width, b.PosX, b.PosY);
             }
             Assert.Equal(1, panel.AvailableBoxes);

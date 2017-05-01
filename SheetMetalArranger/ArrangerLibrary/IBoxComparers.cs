@@ -83,4 +83,31 @@ namespace ArrangerLibrary
             }
         }
     }
+
+    public sealed class BoxEquality : IEqualityComparer<IBox>
+    {
+        private static readonly BoxEquality instance = new BoxEquality();
+
+        private BoxEquality()
+        { }
+
+        public static BoxEquality Instance
+        {
+            get { return instance; }
+        }
+
+        public bool Equals(IBox x, IBox y)
+        {
+            if ((x.Height == y.Height)
+                && (x.Width == y.Width)
+                && (x.PosX == y.PosX)
+                && (x.PosY == y.PosY)) { return true; }
+            return false;
+        }
+
+        public int GetHashCode(IBox obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
 }

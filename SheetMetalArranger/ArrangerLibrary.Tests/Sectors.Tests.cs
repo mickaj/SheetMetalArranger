@@ -13,7 +13,7 @@ namespace ArrangerLibrary.Tests
         private List<IBox> execute(IBox _container, IItem _item, ISector _sector)
         {
 
-            return _sector.DoSection(_container, _item);
+            return _sector.DoSection(_container, _item, false);
         }
 
         public SectorsTests(ITestOutputHelper _output)
@@ -59,8 +59,8 @@ namespace ArrangerLibrary.Tests
             IBox result = new Box(16, 10, 5, 2);
             List<IBox> resultV = execute(cnt, itm, VSector.Instance);
             List<IBox> resultH = execute(cnt, itm, HSector.Instance);
-            Assert.Contains<IBox>(result, resultV, new BoxEquality());
-            Assert.Contains<IBox>(result, resultH, new BoxEquality());
+            Assert.Contains<IBox>(result, resultV, BoxEquality.Instance);
+            Assert.Contains<IBox>(result, resultH, BoxEquality.Instance);
             Assert.Equal(1, resultV.Count);
             Assert.Equal(1, resultH.Count);
         }
@@ -76,11 +76,11 @@ namespace ArrangerLibrary.Tests
             IBox resultH2 = new Box(11, 10, 1, 9);
             List<IBox> resultV = execute(cnt, itm, VSector.Instance);
             List<IBox> resultH = execute(cnt, itm, HSector.Instance);
-            Assert.Contains<IBox>(resultV1, resultV, new BoxEquality());
-            Assert.Contains<IBox>(resultV2, resultV, new BoxEquality());
+            Assert.Contains<IBox>(resultV1, resultV, BoxEquality.Instance);
+            Assert.Contains<IBox>(resultV2, resultV, BoxEquality.Instance);
             Assert.Equal(2, resultV.Count);
-            Assert.Contains<IBox>(resultH1, resultH, new BoxEquality());
-            Assert.Contains<IBox>(resultH2, resultH, new BoxEquality());
+            Assert.Contains<IBox>(resultH1, resultH, BoxEquality.Instance);
+            Assert.Contains<IBox>(resultH2, resultH, BoxEquality.Instance);
             Assert.Equal(2, resultH.Count);
         }
 

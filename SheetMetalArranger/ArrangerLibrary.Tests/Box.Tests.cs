@@ -25,7 +25,7 @@ namespace ArrangerLibrary.Tests
         public void ItemFillsBoxRotationNoMargin()
         {
             item = new Item(10, 5, 0, true);
-            DoAssertionTrue();
+            DoAssertionRotated();
         }
 
         [Fact]
@@ -53,17 +53,22 @@ namespace ArrangerLibrary.Tests
         public void ItemFitsRotationMargin()
         {
             item = new Item(8, 3, 1, true);
-            DoAssertionTrue();
+            DoAssertionRotated();
         }
 
         private void DoAssertionTrue()
         {
-            Assert.True(box.CanHold(item));
+            Assert.Equal(1,box.CanHold(item));
         }
 
         private void DoAssertionFalse()
         {
-            Assert.False(box.CanHold(item));
+            Assert.Equal(0, box.CanHold(item));
+        }
+
+        private void DoAssertionRotated()
+        {
+            Assert.Equal(2,box.CanHold(item));
         }
 
     }

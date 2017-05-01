@@ -1,6 +1,4 @@
-﻿using System;
-using ArrangerLibrary.Abstractions;
-using System.Collections.Generic;
+﻿using ArrangerLibrary.Abstractions;
 
 namespace ArrangerLibrary
 {
@@ -17,11 +15,11 @@ namespace ArrangerLibrary
         public int PosX { get; set; }
         public int PosY { get; set; }
 
-        public bool CanHold(IItem _item)
+        public int CanHold(IItem _item)
         {
-            if ((Width >= _item.Width) && (Height >= _item.Height)) { return true; }
-            if ((Width >= _item.Height) && (Height >= _item.Width) && (_item.Rotatable)) { return true; }
-            return false;
+            if ((Width >= _item.Width) && (Height >= _item.Height)) { return 1; } //box can hold given item without rotation
+            if ((Width >= _item.Height) && (Height >= _item.Width) && (_item.Rotatable)) { return 2; } //box can hold given item if rotated
+            return 0; //box cannot hold given item
         }
 
         public Box(int _posX, int _posY, int _height, int _width)
@@ -32,29 +30,4 @@ namespace ArrangerLibrary
             PosY = _posY;
         }
     }
-
-    public class BoxEquality : IEqualityComparer<IBox>
-    {
-        private static readonly BoxEquality instance = new BoxEquality();
-
-        public static BoxEquality Instance
-        {
-            get { return instance; }
-        }
-
-        public bool Equals(IBox x, IBox y)
-        {
-            if ((x.Height == y.Height)
-                && (x.Width == y.Width)
-                && (x.PosX == y.PosX)
-                && (x.PosY == y.PosY)) { return true; }
-            return false;
-        }
-
-        public int GetHashCode(IBox obj)
-        {
-            return obj.GetHashCode();
-        }
-    }
-
 }

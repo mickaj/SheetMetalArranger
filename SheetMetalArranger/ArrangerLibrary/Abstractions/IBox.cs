@@ -7,6 +7,6 @@
         int Area { get; }
         int PosX { get; set; }
         int PosY { get; set; }
-        bool CanHold(IItem _item);
+        int CanHold(IItem _item);
     }
 }

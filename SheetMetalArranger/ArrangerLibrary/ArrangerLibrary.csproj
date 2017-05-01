@@ -40,13 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\IArrangement.cs" />
+    <Compile Include="Abstractions\IAssignment.cs" />
     <Compile Include="Abstractions\IBatch.cs" />
     <Compile Include="Abstractions\IBox.cs" />
+    <Compile Include="Abstractions\ICalculation.cs" />
     <Compile Include="Abstractions\IItem.cs" />
     <Compile Include="Abstractions\IPanel.cs" />
     <Compile Include="Abstractions\ISector.cs" />
+    <Compile Include="Arrangement.cs" />
+    <Compile Include="IArrangementRatioComparer.cs" />
+    <Compile Include="Assignment.cs" />
     <Compile Include="Batch.cs" />
     <Compile Include="Box.cs" />
+    <Compile Include="Calculation.cs" />
     <Compile Include="IBoxComparers.cs" />
     <Compile Include="IItemComparers.cs" />
     <Compile Include="Item.cs" />

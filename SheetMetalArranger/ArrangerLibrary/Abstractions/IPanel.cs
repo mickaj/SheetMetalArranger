@@ -16,10 +16,14 @@ namespace ArrangerLibrary.Abstractions
 
         double Utilisation { get; }
 
-        void Assign(IBox _box, IItem _item, ISector _sector);
+        List<IAssignment> Assignments { get; }
+
+        void Assign(IBox _box, IItem _item, ISector _sector, bool _rotated);
 
         List<IBox> GetBoxes();
 
         IBox GetBox(int _index);
+
+        IPanel Copy();
     }
 }

@@ -4,6 +4,6 @@ namespace ArrangerLibrary.Abstractions
 {
     public interface ISector
     {
-        List<IBox> DoSection(IBox _container, IItem _item);
+        List<IBox> DoSection(IBox _container, IItem _item, bool _rotated);
     }
 }

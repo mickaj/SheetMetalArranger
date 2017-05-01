@@ -7,13 +7,14 @@ namespace ArrangerLibrary
     public class Panel:IPanel
     {
         private List<IBox> boxes = new List<IBox>();
-        private List<KeyValuePair<IBox, IItem>> assignments = new List<KeyValuePair<IBox, IItem>>();
+        private List<IAssignment> assignments = new List<IAssignment>();
 
         public int Height { get; set; }
         public int Width { get; set; }
         public int Area { get { return Height * Width; } }
         public int AvailableBoxes { get { return boxes.Count; } }
         public int Assigned { get { return assignments.Count; } }
+        public List<IAssignment> Assignments { get { return new List<IAssignment>(assignments); } }
 
         private readonly Merger merger = new Merger();
 
@@ -22,7 +23,7 @@ namespace ArrangerLibrary
             get
             {
                 double itemsInPanel = 0;
-                foreach(KeyValuePair<IBox, IItem> a in assignments)
+                foreach(Assignment a in assignments)
                 {
                     itemsInPanel += a.Value.Area;
                 }
@@ -30,13 +31,12 @@ namespace ArrangerLibrary
             }
         }
 
-        public void Assign(IBox _box, IItem _item, ISector _sector)
+        public void Assign(IBox _box, IItem _item, ISector _sector, bool _rotated)
         {
             if(boxes.Contains(_box))
             {
-                KeyValuePair<IBox, IItem> a = new KeyValuePair<IBox, IItem>(_box, _item);
-                assignments.Add(a);
-                boxes.AddRange(_sector.DoSection(_box, _item));
+                assignments.Add(new Assignment(_box, _item, _rotated));
+                boxes.AddRange(_sector.DoSection(_box, _item, _rotated));
                 boxes.Remove(_box);
                 merge();
             }
@@ -51,11 +51,13 @@ namespace ArrangerLibrary
 
         public IBox GetBox(int _index)
         {
-            if(_index<boxes.Count)
-            {
-                return boxes[_index];
-            }
+            if(_index<boxes.Count) { return boxes[_index]; }
             else { throw new InvalidOperationException("Attempted to access a box which is out of collection range"); }
+        }
+
+        public IPanel Copy()
+        {
+            return new Panel(Height, Width, boxes, assignments);
         }
 
         private void merge()
@@ -70,6 +72,14 @@ namespace ArrangerLibrary
             Height = _height;
             Width = _width;
             boxes.Add(new Box(0, 0, _height, _width));
+        }
+
+        private Panel(int _height, int _width, List<IBox> _boxes, List<IAssignment> _assignments)
+        {
+            Height = _height;
+            Width = _width;
+            boxes = new List<IBox>(_boxes);
+            assignments = new List<IAssignment>(_assignments);
         }
 
         private class Merger
