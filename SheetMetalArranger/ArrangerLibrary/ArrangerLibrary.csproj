@@ -65,5 +65,6 @@
     <None Include="Class diagram\ClassDiagram1.cd" />
     <None Include="Class diagram\Design.xlsx" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

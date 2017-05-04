@@ -156,17 +156,17 @@ namespace ArrangerLibrary
             foreach (IPanel pnl in arr.GetPanels())
             {
                 output += String.Format("---Panel no: {0}({1})\n", panelNo, pnl.Utilisation);
-                foreach (Assignment asg in pnl.Assignments)
-                {
-                    output += String.Format("Height={0}; Width={1}; PosX={2}; PosY={3}; Rotated={4}\n", asg.Value.Height, asg.Value.Width, asg.Key.PosX, asg.Key.PosY, asg.Rotated);
-                }
+                //foreach (Assignment asg in pnl.Assignments)
+                //{
+                //    output += String.Format("Height={0}; Width={1}; PosX={2}; PosY={3}; Rotated={4}\n", asg.Value.Height, asg.Value.Width, asg.Key.PosX, asg.Key.PosY, asg.Rotated);
+                //}
                 panelNo++;
             }
             output += String.Format("---Left items: {0}\n", arr.GetLeftItems().Count);
-            foreach (IItem item in arr.GetLeftItems())
-            {
-                output += String.Format("Height={0}; Width={1}\n", item.Height, item.Width);
-            }
+            //foreach (IItem item in arr.GetLeftItems())
+            //{
+            //    output += String.Format("Height={0}; Width={1}\n", item.Height, item.Width);
+            //}
             return output;
         }
 
