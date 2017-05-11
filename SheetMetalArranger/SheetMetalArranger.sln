@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrangerLibrary", "ArrangerLibrary\ArrangerLibrary.csproj", "{AC227112-AC8D-4F76-A11D-2E0E7EA4EF6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrangerLibrary.Tests", "ArrangerLibrary.Tests\ArrangerLibrary.Tests.csproj", "{7DCEB27B-FC4A-435A-8B11-7084F40B66D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArrangerLibrary", "ArrangerLibrary", "{A5A24551-328C-4BA8-8403-68B8422CA72F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DemoWPF", "DemoWPF", "{D75CDDDD-8B67-4530-B4B2-5EA4073605F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoWPF", "DemoWPF\DemoWPF.csproj", "{3A3F8A6E-1644-499C-9723-63D723C628A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +27,10 @@ Global
 		{7DCEB27B-FC4A-435A-8B11-7084F40B66D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DCEB27B-FC4A-435A-8B11-7084F40B66D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DCEB27B-FC4A-435A-8B11-7084F40B66D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A3F8A6E-1644-499C-9723-63D723C628A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A3F8A6E-1644-499C-9723-63D723C628A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A3F8A6E-1644-499C-9723-63D723C628A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A3F8A6E-1644-499C-9723-63D723C628A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AC227112-AC8D-4F76-A11D-2E0E7EA4EF6F} = {A5A24551-328C-4BA8-8403-68B8422CA72F}
 		{7DCEB27B-FC4A-435A-8B11-7084F40B66D2} = {A5A24551-328C-4BA8-8403-68B8422CA72F}
+		{3A3F8A6E-1644-499C-9723-63D723C628A6} = {D75CDDDD-8B67-4530-B4B2-5EA4073605F8}
 	EndGlobalSection
 EndGlobal
