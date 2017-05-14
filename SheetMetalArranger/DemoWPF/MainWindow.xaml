@@ -6,10 +6,50 @@
         xmlns:local="clr-namespace:DemoWPF"
         xmlns:tf="clr-namespace:DemoWPF.View.TextFiles"
         mc:Ignorable="d"
+        xmlns:ucs="clr-namespace:DemoWPF.View.UserControls"
+        xmlns:vms="clr-namespace:DemoWPF.ViewModel"
         Title="{x:Static tf:TextFile.mainWindowTitle}" Height="350" Width="525"
-        MinHeight="350" MinWidth="525"
         Style="{StaticResource ResourceKey=themedWindow}">
-    <Grid>
-        <Button Content="test" Style="{StaticResource ResourceKey=themedButton}"/>
+    <Window.Resources>
+        <vms:MainWindowViewModel x:Key="mainWindowWiewModel"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource mainWindowWiewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--top menu-->
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Gray" FontWeight="Bold" IsMainMenu="True">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="{x:Static tf:TextFile.menuClose}"  Grid.Column="0" Command="{Binding Path=Close}"/>
+            <MenuItem Header="{x:Static tf:TextFile.menuAbout}" HorizontalAlignment="Right" Grid.Column="1" Command="{Binding Path=About}"/>
+            <MenuItem Header="{x:Static tf:TextFile.menuWWW}" HorizontalAlignment="Right" Grid.Column="2" Command="{Binding Path=WWW}"/>
+        </Menu>
+        <!--top menu-->
+        <!--items panel-->
+        <ucs:ItemsList Grid.Row="1" Grid.Column="0" Margin="10" Source="{Binding Path=Items, Mode=TwoWay}"/>
+        <!--items panel-->
+        <!--panels panel :)-->
+        <Button Grid.Row="1" Grid.Column="1" Content="panels panel placeholder" Margin="10" Command="{Binding Path=AddCommand}"/>
+        <!--panels panel :)-->
+        <!--results panel-->
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="results panel placeholder" Margin="10,10,10,20" Command="{Binding Path=DisplayCommand}"/>
+        <!--results panel-->
     </Grid>
 </Window>

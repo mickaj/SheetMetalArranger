@@ -117,16 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="mainWindowTitle" xml:space="preserve">
-    <value>SheetMetalArranger - Demo</value>
+  <data name="itemsArea" xml:space="preserve">
+    <value>Area</value>
   </data>
-  <data name="menuAbout" xml:space="preserve">
-    <value>About</value>
+  <data name="itemsClear" xml:space="preserve">
+    <value>clear all</value>
   </data>
-  <data name="menuClose" xml:space="preserve">
-    <value>Close</value>
+  <data name="itemsHeight" xml:space="preserve">
+    <value>Height</value>
   </data>
-  <data name="menuWWW" xml:space="preserve">
-    <value>visit mkajzer.pl</value>
+  <data name="itemsListHeader" xml:space="preserve">
+    <value>Items:</value>
+  </data>
+  <data name="itemsMargin" xml:space="preserve">
+    <value>Margin</value>
+  </data>
+  <data name="itemsRotation" xml:space="preserve">
+    <value>Rotation?</value>
+  </data>
+  <data name="itemsWidth" xml:space="preserve">
+    <value>Width</value>
   </data>
 </root>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DemoWPF.View.TextFiles {
+namespace DemoWPF.View.UserControls {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace DemoWPF.View.TextFiles {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class TextFile {
+    public class ItemsListTextFile {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal TextFile() {
+        internal ItemsListTextFile() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DemoWPF.View.TextFiles {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DemoWPF.View.TextFiles.TextFile", typeof(TextFile).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DemoWPF.View.UserControls.ItemsListTextFile", typeof(ItemsListTextFile).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,65 @@ namespace DemoWPF.View.TextFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SheetMetalArranger - Demo.
+        ///   Looks up a localized string similar to Area.
         /// </summary>
-        public static string mainWindowTitle {
+        public static string itemsArea {
             get {
-                return ResourceManager.GetString("mainWindowTitle", resourceCulture);
+                return ResourceManager.GetString("itemsArea", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About.
+        ///   Looks up a localized string similar to clear all.
         /// </summary>
-        public static string menuAbout {
+        public static string itemsClear {
             get {
-                return ResourceManager.GetString("menuAbout", resourceCulture);
+                return ResourceManager.GetString("itemsClear", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Close.
+        ///   Looks up a localized string similar to Height.
         /// </summary>
-        public static string menuClose {
+        public static string itemsHeight {
             get {
-                return ResourceManager.GetString("menuClose", resourceCulture);
+                return ResourceManager.GetString("itemsHeight", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to visit mkajzer.pl.
+        ///   Looks up a localized string similar to Items:.
         /// </summary>
-        public static string menuWWW {
+        public static string itemsListHeader {
             get {
-                return ResourceManager.GetString("menuWWW", resourceCulture);
+                return ResourceManager.GetString("itemsListHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Margin.
+        /// </summary>
+        public static string itemsMargin {
+            get {
+                return ResourceManager.GetString("itemsMargin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotation?.
+        /// </summary>
+        public static string itemsRotation {
+            get {
+                return ResourceManager.GetString("itemsRotation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        public static string itemsWidth {
+            get {
+                return ResourceManager.GetString("itemsWidth", resourceCulture);
             }
         }
     }

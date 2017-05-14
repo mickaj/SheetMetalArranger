@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="DemoWPF.View.UserControls.ItemsList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DemoWPF.View.UserControls"
+             mc:Ignorable="d" x:Name="this"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <GroupBox>
+        <GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{x:Static local:ItemsListTextFile.itemsListHeader}" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Button Grid.Column="1" Content="{x:Static local:ItemsListTextFile.itemsClear}" FontWeight="Bold" Margin="10,0,10,2" Padding="3" Click="ClearAll_Click"/>
+            </Grid>
+        </GroupBox.Header>
+        <DataGrid ItemsSource="{Binding ElementName=this, Path=Source, Mode=TwoWay}" IsReadOnly="False" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static local:ItemsListTextFile.itemsHeight}" Binding="{Binding Height}"/>
+                <DataGridTextColumn Header="{x:Static local:ItemsListTextFile.itemsWidth}" Binding="{Binding Width}"/>
+                <DataGridTextColumn Header="{x:Static local:ItemsListTextFile.itemsMargin}" Binding="{Binding Margin}"/>
+                <DataGridTextColumn Header="{x:Static local:ItemsListTextFile.itemsArea}" Binding="{Binding Area, Mode=OneWay}"/>
+                <DataGridCheckBoxColumn Header="{x:Static local:ItemsListTextFile.itemsRotation}" Binding="{Binding Rotation}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </GroupBox>
+</UserControl>
