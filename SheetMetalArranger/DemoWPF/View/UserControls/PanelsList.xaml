@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="DemoWPF.View.UserControls.PanelsList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DemoWPF.View.UserControls"
+             mc:Ignorable="d" x:Name="this"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <GroupBox>
+        <GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{x:Static local:PanelsListTextFile.panelsListHeader}" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Button Grid.Column="1" Content="{x:Static local:PanelsListTextFile.panelsReset}" FontWeight="Bold" Margin="10,0,10,2" Padding="3" Click="Reset_Click"/>
+            </Grid>
+        </GroupBox.Header>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <WrapPanel Margin="5,0" Grid.Row="0">
+                <TextBlock Text="{x:Static local:PanelsListTextFile.panelsAllowNew}" />
+                <CheckBox x:Name="allowNewChk"  Margin="5,0" IsChecked="{Binding ElementName=this, Path=AllowNew, Mode=TwoWay}"/>
+                <TextBlock Text="{x:Static local:PanelsListTextFile.panelsNewHeight}"/>
+                <TextBox Width="80" Margin="5,0" Text="{Binding ElementName=this, Path=NewHeight, Mode=TwoWay}" IsEnabled="{Binding ElementName=allowNewChk, Path=IsChecked}" MaxLength="10"/>
+                <TextBlock Text="{x:Static local:PanelsListTextFile.panelsNewWidth}"/>
+                <TextBox Width="80" Margin="5,0" Text="{Binding ElementName=this, Path=NewWidth, Mode=TwoWay}" IsEnabled="{Binding ElementName=allowNewChk, Path=IsChecked}" MaxLength="10"/>
+            </WrapPanel>
+            <DataGrid Grid.Row="1" ItemsSource="{Binding ElementName=this, Path=Source, Mode=TwoWay}" IsReadOnly="False" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{x:Static local:PanelsListTextFile.panelsHeight}" Binding="{Binding Height}">
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="MaxLength" Value="9"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="{x:Static local:PanelsListTextFile.panelsWidth}" Binding="{Binding Width}">
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="MaxLength" Value="9"/>
+                        </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="{x:Static local:PanelsListTextFile.panelsQTY}" Binding="{Binding QTY}">
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="MaxLength" Value="3"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </GroupBox>
+</UserControl>

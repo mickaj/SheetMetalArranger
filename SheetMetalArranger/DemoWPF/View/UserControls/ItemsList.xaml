@@ -19,9 +19,27 @@
         </GroupBox.Header>
         <DataGrid ItemsSource="{Binding ElementName=this, Path=Source, Mode=TwoWay}" IsReadOnly="False" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static local:ItemsListTextFile.itemsHeight}" Binding="{Binding Height}"/>
-                <DataGridTextColumn Header="{x:Static local:ItemsListTextFile.itemsWidth}" Binding="{Binding Width}"/>
-                <DataGridTextColumn Header="{x:Static local:ItemsListTextFile.itemsMargin}" Binding="{Binding Margin}"/>
+                <DataGridTextColumn Header="{x:Static local:ItemsListTextFile.itemsHeight}" Binding="{Binding Height}">
+                    <DataGridTextColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="MaxLength" Value="9"/>
+                        </Style>
+                    </DataGridTextColumn.EditingElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static local:ItemsListTextFile.itemsWidth}" Binding="{Binding Width}">
+                    <DataGridTextColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="MaxLength" Value="9"/>
+                        </Style>
+                    </DataGridTextColumn.EditingElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static local:ItemsListTextFile.itemsMargin}" Binding="{Binding Margin}">
+                    <DataGridTextColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="MaxLength" Value="3"/>
+                        </Style>
+                    </DataGridTextColumn.EditingElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="{x:Static local:ItemsListTextFile.itemsArea}" Binding="{Binding Area, Mode=OneWay}"/>
                 <DataGridCheckBoxColumn Header="{x:Static local:ItemsListTextFile.itemsRotation}" Binding="{Binding Rotation}"/>
             </DataGrid.Columns>

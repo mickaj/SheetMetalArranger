@@ -1,21 +1,90 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
-using DemoWPF.ViewModelCommands;
-using System.Collections.Generic;
+using DemoWPF.ViewModel.Commands;
 using System.Collections.ObjectModel;
+using System.Windows.Media.Imaging;
+using System.Drawing;
 using System;
 
 namespace DemoWPF.ViewModel
 {
     public class MainWindowViewModel:INotifyPropertyChanged
     {
-        public ObservableCollection<ListedItem> Items { get; set; }
         public MainWindowViewModel()
         {
             Items = new ObservableCollection<ListedItem>();
-            Items.Add(new ListedItem { Height = 20, Width = 30, Margin = 1, Rotation = true });
+            Panels = new ObservableCollection<ListedPanel>();
+            Tabs = new ObservableCollection<ResultsTab>();
+            BitmapImage pic = new BitmapImage(new Uri("file://d:/test.png"));
+            Tabs.Add(new ResultsTab { Count=0, Height = 1500, Width=3000, Utilisation=0.80, Drawing=pic });
+            Tabs.Add(new ResultsTab { Count = 1, Height = 1250, Width = 2500, Utilisation = 0.66, Drawing = pic });
+            Calculation = new Results();
+            Calculation.Calculated = true;
+            Calculation.Utilisation = 0.34;
+            Calculation.BestPanel = 0.99;
+            Calculation.WorstPanel = 0.0001;
+            Calculation.TotalPanels = 100;
+            Calculation.TotalItems = 1999;
+            Calculation.ItemsArranged = 996;
+            Calculation.ItemsLeft = 9;
+        }
+
+        #region Items
+        public ObservableCollection<ListedItem> Items { get; set; }
+        #endregion
+
+        #region Panels
+        public ObservableCollection<ListedPanel> Panels { get; set; }
+
+        private int newHeight=1500;
+        public int NewHeight
+        {
+            get { return newHeight; }
+            set
+            {
+                    if (value < 1) { newHeight = 1; } else { newHeight = value; }
+                    OnPropertyChanged("NewHeight");
+            }
+        }
+
+        private int newWidth=3000;
+        public int NewWidth
+        {
+            get { return newWidth; }
+            set
+            {
+                if (value < 1) { newWidth = 1; } else { newWidth = value; }
+                OnPropertyChanged("NewWidth");
+            }
+        }
+
+        private bool allowNew;
+        public bool AllowNew
+        {
+            get { return allowNew; }
+            set
+            {
+                allowNew = value;
+                OnPropertyChanged("AllowNew");
+            }
+        }
+        #endregion
+
+        #region Results
+        private Results calculation;
+        public Results Calculation
+        {
+            get { return calculation; }
+            set
+            {
+                calculation = value;
+                OnPropertyChanged("Calculation");
+            }
         }
         
+        public ObservableCollection<ResultsTab> Tabs { get; set; }
+        #endregion
+
         //CloseCommand definition
         private ICommand closeCommand;
 
@@ -110,56 +179,5 @@ namespace DemoWPF.ViewModel
             }
         }
         //End of displayCommand definition
-    }
-
-    public class ListedItem : INotifyPropertyChanged
-    {
-        private int height;
-        public int Height
-        {
-            get { return height; }
-            set
-            {
-                if(value<1) { height = 1; } else { height = value; }  
-                OnPropertyChanged("Area", "Height");
-            }
-        }
-
-
-        private int width;
-        public int Width
-        {
-            get { return width; }
-            set
-            {
-                if (value < 1) { width = 1; } else { width = value; }
-                OnPropertyChanged("Area", "Width");
-            }
-        }
-
-        public int Margin { get; set; }
-        public bool Rotation { get; set; }
-        public int Area { get { return Height * Width; } }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(params string[] propertiesChanged)
-        {
-            if (PropertyChanged != null)
-            {
-                foreach (string property in propertiesChanged)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(property));
-                }
-            }
-        }
-
-        public ListedItem()
-        {
-            Height = 1;
-            Width = 1;
-            Margin = 0;
-            Rotation = false;
-        }
     }
 }

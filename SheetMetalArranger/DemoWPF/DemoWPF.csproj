@@ -55,11 +55,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\Commands\MenuCommands.cs" />
+    <Compile Include="ViewModel\Commands\TempCommands.cs" />
+    <Compile Include="ViewModel\ListedItem.cs" />
+    <Compile Include="ViewModel\ListedPanel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\Results.cs" />
+    <Compile Include="ViewModel\ResultsTab.cs" />
     <Compile Include="View\TextFiles\TextFile.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TextFile.resx</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\PanelsList.xaml.cs">
+      <DependentUpon>PanelsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\ItemsList.xaml.cs">
       <DependentUpon>ItemsList.xaml</DependentUpon>
@@ -69,6 +77,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ItemsListTextFile.resx</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\PanelsListTextFile.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PanelsListTextFile.resx</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\ResultsControl.xaml.cs">
+      <DependentUpon>ResultsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\ResultsControlTextFile.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResultsControlTextFile.resx</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\ResultsConverters.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,7 +107,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\PanelsList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\UserControls\ItemsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\ResultsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,6 +146,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ItemsListTextFile.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\UserControls\PanelsListTextFile.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PanelsListTextFile.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserControls\ResultsControlTextFile.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResultsControlTextFile.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -132,6 +170,11 @@
       <Project>{ac227112-ac8d-4f76-a11d-2e0e7ea4ef6f}</Project>
       <Name>ArrangerLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ViewModel\test.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
