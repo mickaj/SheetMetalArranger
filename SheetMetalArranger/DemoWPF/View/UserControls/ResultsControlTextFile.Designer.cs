@@ -70,6 +70,15 @@ namespace DemoWPF.View.UserControls {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CALCULATE.
+        /// </summary>
+        public static string resultsCalculate {
+            get {
+                return ResourceManager.GetString("resultsCalculate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to calculated.
         /// </summary>
         public static string resultsCalculated {

@@ -55,6 +55,7 @@
                     <TextBlock Text="{x:Static local:ResultsControlTextFile.resultsItemsLeft}"/>
                     <TextBlock Text="{Binding ElementName=this, Path=Results.ItemsLeft, Mode=OneWay}"/>
                 </WrapPanel>
+                <Button Content="{x:Static local:ResultsControlTextFile.resultsCalculate}" Margin="5,15,5,5" Command="{Binding ElementName=this, Path=CalculateCommand, Mode=OneWay}"/>
             </StackPanel>
             <TabControl Grid.Column="1" ItemsSource="{Binding ElementName=this, Path=ResultsTabs, Mode=OneWay}">
                 <TabControl.Resources>

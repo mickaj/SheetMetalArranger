@@ -2,9 +2,6 @@
 using System.Windows.Input;
 using DemoWPF.ViewModel.Commands;
 using System.Collections.ObjectModel;
-using System.Windows.Media.Imaging;
-using System.Drawing;
-using System;
 
 namespace DemoWPF.ViewModel
 {
@@ -15,18 +12,19 @@ namespace DemoWPF.ViewModel
             Items = new ObservableCollection<ListedItem>();
             Panels = new ObservableCollection<ListedPanel>();
             Tabs = new ObservableCollection<ResultsTab>();
-            BitmapImage pic = new BitmapImage(new Uri("file://d:/test.png"));
-            Tabs.Add(new ResultsTab { Count=0, Height = 1500, Width=3000, Utilisation=0.80, Drawing=pic });
-            Tabs.Add(new ResultsTab { Count = 1, Height = 1250, Width = 2500, Utilisation = 0.66, Drawing = pic });
-            Calculation = new Results();
-            Calculation.Calculated = true;
-            Calculation.Utilisation = 0.34;
-            Calculation.BestPanel = 0.99;
-            Calculation.WorstPanel = 0.0001;
-            Calculation.TotalPanels = 100;
-            Calculation.TotalItems = 1999;
-            Calculation.ItemsArranged = 996;
-            Calculation.ItemsLeft = 9;
+            calculation = new Results();
+            //BitmapImage pic = new BitmapImage(new Uri("file://d:/test.png"));
+            //Tabs.Add(new ResultsTab { Count=0, Height = 1500, Width=3000, Utilisation=0.80, Drawing=pic });
+            //Tabs.Add(new ResultsTab { Count = 1, Height = 1250, Width = 2500, Utilisation = 0.66, Drawing = pic });
+            //Calculation = new Results();
+            //Calculation.Calculated = true;
+            //Calculation.Utilisation = 0.34;
+            //Calculation.BestPanel = 0.99;
+            //Calculation.WorstPanel = 0.0001;
+            //Calculation.TotalPanels = 100;
+            //Calculation.TotalItems = 1999;
+            //Calculation.ItemsArranged = 996;
+            //Calculation.ItemsLeft = 9;
         }
 
         #region Items
@@ -132,6 +130,18 @@ namespace DemoWPF.ViewModel
             }
         }
         //End of AboutCommand definition
+
+        //CalculateCommand definition
+        private ICommand calculateCommand;
+        public ICommand CalculateCommand
+        {
+            get
+            {
+                if(calculateCommand == null) { calculateCommand = new CalculateCommand(this); }
+                return calculateCommand;
+            }
+        }
+        //Ebd if CalculateCommand definition
 
         //implementation of INotifyPropertyChanged - BEGINS
         public event PropertyChangedEventHandler PropertyChanged;

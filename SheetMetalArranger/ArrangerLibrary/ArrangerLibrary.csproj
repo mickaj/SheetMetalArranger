@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,13 +57,13 @@
     <Compile Include="Calculation.cs" />
     <Compile Include="IBoxComparers.cs" />
     <Compile Include="IItemComparers.cs" />
+    <Compile Include="ImageDrawer.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Panel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sectors.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Class diagram\ClassDiagram1.cd" />
     <None Include="Class diagram\Design.xlsx" />
   </ItemGroup>
   <ItemGroup />

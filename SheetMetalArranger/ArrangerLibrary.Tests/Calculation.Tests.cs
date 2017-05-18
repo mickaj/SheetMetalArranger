@@ -102,6 +102,20 @@ namespace ArrangerLibrary.Tests
             output.WriteLine(calc.OutputBest());
         }
 
+        [Fact]
+        public void RandomTesterWithDefinedPanelsAndNewPanelsAllowed()
+        {
+            IBatch batch = GetRandomBatch(1500, 3000, 10, 15, 20, 30, 50);
+            List<IPanel> panels = new List<IPanel>();
+            for (int i = 1; i <= 10; i++)
+            {
+                panels.Add(new Panel(1500, 3000));
+            }
+            ICalculation calc = new Calculation(batch, panels, 1000,2000);
+            calc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, HSector.Instance);
+            output.WriteLine(calc.OutputBest());
+        }
+
         private IBatch GetRandomBatch(int _h, int _w, int _m, int _r1, int _r2, int _r3, int _r4)
         {
             Random randGen = new Random(DateTime.Now.GetHashCode());

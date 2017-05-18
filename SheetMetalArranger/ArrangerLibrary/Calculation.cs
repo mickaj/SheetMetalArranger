@@ -55,6 +55,8 @@ namespace ArrangerLibrary
             allowNewPanels = true;
             defaultHeight = _newHeight;
             defaultWidth = _newWidth;
+            arrangements.Add(new Arrangement());
+            arrangements[0].AddPanels(_panels);
         }
 
         public void Calculate(IComparer<IItem> _item1comparer, IComparer<IItem> _item2comparer, IComparer<IItem> _item3comparer, ISector _sector)
@@ -168,6 +170,12 @@ namespace ArrangerLibrary
             //    output += String.Format("Height={0}; Width={1}\n", item.Height, item.Width);
             //}
             return output;
+        }
+
+        public IArrangement GetBestArrangement()
+        {
+            arrangements.Sort(ArrangementRatioComparer.Instance);
+            return arrangements[0];
         }
 
         private List<PossibleFit> findPossibleFits(IItem _item, IArrangement _arrangement)

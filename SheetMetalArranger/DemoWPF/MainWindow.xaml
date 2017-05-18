@@ -49,7 +49,7 @@
         <ucs:PanelsList Grid.Row="1" Grid.Column="1" Margin="10" AllowNew="{Binding Path=AllowNew, Mode=TwoWay}" NewHeight="{Binding Path=NewHeight, Mode=TwoWay}" NewWidth="{Binding Path=NewWidth, Mode=TwoWay}" Source="{Binding Path=Panels, Mode=TwoWay}"/>
         <!--panels panel :)-->
         <!--results panel-->
-        <ucs:ResultsControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,10,10" Results="{Binding Calculation, Mode=OneWay}" ResultsTabs="{Binding Tabs, Mode=TwoWay}"/>
+        <ucs:ResultsControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,10,10" Results="{Binding Calculation, Mode=OneWay}" ResultsTabs="{Binding Tabs, Mode=TwoWay}" CalculateCommand="{Binding CalculateCommand, Mode=OneWay}"/>
         <!--results panel-->
     </Grid>
 </Window>

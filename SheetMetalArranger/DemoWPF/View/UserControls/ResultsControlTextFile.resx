@@ -120,6 +120,9 @@
   <data name="resultsBestPanel" xml:space="preserve">
     <value>Best panel: </value>
   </data>
+  <data name="resultsCalculate" xml:space="preserve">
+    <value>CALCULATE</value>
+  </data>
   <data name="resultsCalculated" xml:space="preserve">
     <value>calculated</value>
   </data>

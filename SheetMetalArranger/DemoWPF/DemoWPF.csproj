@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Commands\CalculateCommand.cs" />
     <Compile Include="ViewModel\Commands\MenuCommands.cs" />
     <Compile Include="ViewModel\Commands\TempCommands.cs" />
     <Compile Include="ViewModel\ListedItem.cs" />

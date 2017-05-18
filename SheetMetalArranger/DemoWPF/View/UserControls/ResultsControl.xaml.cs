@@ -46,5 +46,19 @@ namespace DemoWPF.View.UserControls
         // Using a DependencyProperty as the backing store for ResultsTabs.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ResultsTabsProperty =
             DependencyProperty.Register("ResultsTabs", typeof(ObservableCollection<ResultsTab>), typeof(ResultsControl));
+
+
+
+        public ICommand CalculateCommand
+        {
+            get { return (ICommand)GetValue(CalculateCommandProperty); }
+            set { SetValue(CalculateCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CalculateCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CalculateCommandProperty =
+            DependencyProperty.Register("CalculateCommand", typeof(ICommand), typeof(ResultsControl));
+
+
     }
 }
