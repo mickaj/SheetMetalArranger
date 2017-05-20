@@ -17,8 +17,8 @@ namespace ArrangerLibrary
             using (Graphics graphBuffer = Graphics.FromImage(output))
             {
                 graphBuffer.Clear(Color.Gray);
-                Pen dwgPen = new Pen(Color.Black, 1);
-                Font sizeFont = new Font(FontFamily.GenericMonospace, 10);
+                Pen dwgPen = new Pen(Color.Black, 10);
+                Font sizeFont = new Font(FontFamily.GenericMonospace, 100);
                 foreach (IAssignment i in _panel.Assignments)
                 {
                     int itemH, itemW;
@@ -37,7 +37,7 @@ namespace ArrangerLibrary
                     int h = itemH;
                     int w = itemW;
                     graphBuffer.DrawRectangle(dwgPen, X, Y, w, h);
-                    string size = w.ToString() + "x" + h.ToString();
+                    string size = h.ToString() + "x" + w.ToString();
                     graphBuffer.DrawString(size, sizeFont, Brushes.Black, X + 10, Y + 10);
                 }
                 graphBuffer.Dispose();

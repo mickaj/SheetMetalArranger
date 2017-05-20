@@ -141,6 +141,9 @@
   <data name="resultsPanelCount" xml:space="preserve">
     <value>Panel no. </value>
   </data>
+  <data name="resultsReset" xml:space="preserve">
+    <value>RESET RESULTS</value>
+  </data>
   <data name="resultsSquareUnits" xml:space="preserve">
     <value>square units</value>
   </data>

@@ -106,6 +106,15 @@ namespace DemoWPF.View.UserControls {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to random set.
+        /// </summary>
+        public static string itemsRandom {
+            get {
+                return ResourceManager.GetString("itemsRandom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rotation?.
         /// </summary>
         public static string itemsRotation {

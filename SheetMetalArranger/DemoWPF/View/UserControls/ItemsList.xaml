@@ -13,8 +13,11 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{x:Static local:ItemsListTextFile.itemsListHeader}" FontWeight="Bold" VerticalAlignment="Center"/>
-                <Button Grid.Column="1" Content="{x:Static local:ItemsListTextFile.itemsClear}" FontWeight="Bold" Margin="10,0,10,2" Padding="3" Click="ClearAll_Click"/>
+                <WrapPanel Grid.Column="0">
+                    <TextBlock Text="{x:Static local:ItemsListTextFile.itemsListHeader}" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Button Content="{x:Static local:ItemsListTextFile.itemsClear}" FontWeight="Bold" Margin="10,0,10,2" Padding="3" Click="ClearAll_Click"/>
+                    <Button Content="{x:Static local:ItemsListTextFile.itemsRandom}" FontWeight="Bold" Margin="10,0,10,2" Padding="3" Command="{Binding ElementName=this, Path=RandomSetCommand, Mode=OneWay}"/>
+                </WrapPanel>
             </Grid>
         </GroupBox.Header>
         <DataGrid ItemsSource="{Binding ElementName=this, Path=Source, Mode=TwoWay}" IsReadOnly="False" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">

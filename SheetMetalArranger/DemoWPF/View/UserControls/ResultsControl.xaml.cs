@@ -60,5 +60,14 @@ namespace DemoWPF.View.UserControls
             DependencyProperty.Register("CalculateCommand", typeof(ICommand), typeof(ResultsControl));
 
 
+
+        public ICommand ResetCommand
+        {
+            get { return (ICommand)GetValue(ResetCommandProperty); }
+            set { SetValue(ResetCommandProperty, value); }
+        }
+        // Using a DependencyProperty as the backing store for ResetCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ResetCommandProperty =
+            DependencyProperty.Register("ResetCommand", typeof(ICommand), typeof(ResultsControl))   ;
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="IBoxComparers.cs" />
     <Compile Include="IItemComparers.cs" />
     <Compile Include="ImageDrawer.cs" />
+    <Compile Include="IPanelComparers.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Panel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

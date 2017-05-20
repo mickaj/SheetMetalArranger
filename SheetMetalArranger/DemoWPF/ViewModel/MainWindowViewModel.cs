@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace DemoWPF.ViewModel
 {
-    public class MainWindowViewModel:INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         public MainWindowViewModel()
         {
@@ -34,18 +34,18 @@ namespace DemoWPF.ViewModel
         #region Panels
         public ObservableCollection<ListedPanel> Panels { get; set; }
 
-        private int newHeight=1500;
+        private int newHeight = 1500;
         public int NewHeight
         {
             get { return newHeight; }
             set
             {
-                    if (value < 1) { newHeight = 1; } else { newHeight = value; }
-                    OnPropertyChanged("NewHeight");
+                if (value < 1) { newHeight = 1; } else { newHeight = value; }
+                OnPropertyChanged("NewHeight");
             }
         }
 
-        private int newWidth=3000;
+        private int newWidth = 3000;
         public int NewWidth
         {
             get { return newWidth; }
@@ -79,7 +79,7 @@ namespace DemoWPF.ViewModel
                 OnPropertyChanged("Calculation");
             }
         }
-        
+
         public ObservableCollection<ResultsTab> Tabs { get; set; }
         #endregion
 
@@ -137,11 +137,35 @@ namespace DemoWPF.ViewModel
         {
             get
             {
-                if(calculateCommand == null) { calculateCommand = new CalculateCommand(this); }
+                if (calculateCommand == null) { calculateCommand = new CalculateCommand(this); }
                 return calculateCommand;
             }
         }
-        //Ebd if CalculateCommand definition
+        //End of CalculateCommand definition
+
+        //ResetResultsCommand definition
+        private ICommand resetResultsCommand;
+        public ICommand ResetResultsCommand
+        {
+            get
+            {
+                if (resetResultsCommand == null) { resetResultsCommand = new ResetResultsCommand(this); }
+                return resetResultsCommand;
+            }
+        }
+        //End of ResetResultsCommand definition
+
+        //RandomSet command definition
+        private ICommand randomSetCommand;
+        public ICommand RandomSetCommand
+        {
+            get
+            {
+                if (randomSetCommand == null) { randomSetCommand = new RandomSetCommand(this); }
+                return randomSetCommand;
+            }
+        }
+        //End of RandomSet command definition
 
         //implementation of INotifyPropertyChanged - BEGINS
         public event PropertyChangedEventHandler PropertyChanged;

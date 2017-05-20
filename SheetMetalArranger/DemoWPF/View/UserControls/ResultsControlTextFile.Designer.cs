@@ -133,6 +133,15 @@ namespace DemoWPF.View.UserControls {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RESET RESULTS.
+        /// </summary>
+        public static string resultsReset {
+            get {
+                return ResourceManager.GetString("resultsReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to square units.
         /// </summary>
         public static string resultsSquareUnits {

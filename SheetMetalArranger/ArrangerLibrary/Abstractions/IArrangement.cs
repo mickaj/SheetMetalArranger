@@ -19,5 +19,13 @@ namespace ArrangerLibrary.Abstractions
         void AddPanels(List<IPanel> _panels);
 
         IArrangement NewBranch();
+
+        IPanel GetBestPanel();
+
+        IPanel GetWorstPanel();
+
+        int TotalPanelsArea { get; }
+        int TotalItemsArea { get; }
+        int ItemsArranged { get; }
     }
 }

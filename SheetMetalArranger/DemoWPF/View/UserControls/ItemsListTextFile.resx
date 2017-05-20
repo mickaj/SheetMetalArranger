@@ -132,6 +132,9 @@
   <data name="itemsMargin" xml:space="preserve">
     <value>Margin</value>
   </data>
+  <data name="itemsRandom" xml:space="preserve">
+    <value>random set</value>
+  </data>
   <data name="itemsRotation" xml:space="preserve">
     <value>Rotation?</value>
   </data>

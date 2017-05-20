@@ -28,5 +28,16 @@ namespace DemoWPF.View.UserControls
         {
             Source.Clear();
         }
+
+
+
+        public ICommand RandomSetCommand
+        {
+            get { return (ICommand)GetValue(RandomSetCommandProperty); }
+            set { SetValue(RandomSetCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RandomSetCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RandomSetCommandProperty = DependencyProperty.Register("RandomSetCommand", typeof(ICommand), typeof(ItemsList));
     }
 }

@@ -2,11 +2,10 @@
 using ArrangerLibrary.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace DemoWPF.ViewModel.Commands
 {
@@ -44,6 +43,18 @@ namespace DemoWPF.ViewModel.Commands
 
         public void Execute(object parameter)
         {
+            //get folder location for saving drawings
+            string systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            string complete = systemPath + @"\ArrangerDrawings\"+ DateTime.Now.Ticks;
+            //MessageBox.Show(complete);
+            if(!Directory.Exists(complete))
+            {
+                Directory.CreateDirectory(complete);
+            }
+            //create instance of image drawer
+            ImageDrawer drawer = new ImageDrawer();
+            //clear tabs
+            vm.Tabs.Clear();
             //geterate items list
             List<IItem> items = new List<IItem>();
             foreach(ListedItem li in vm.Items)
@@ -59,7 +70,7 @@ namespace DemoWPF.ViewModel.Commands
             {
                 foreach (ListedPanel lp in vm.Panels)
                 {
-                    panels.Add(new Panel(lp.Height, lp.Width));
+                    for (int qty = 1; qty<= lp.QTY; qty++) { panels.Add(new Panel(lp.Height, lp.Width)); }
                 }
             }
             //create calculation
@@ -68,7 +79,6 @@ namespace DemoWPF.ViewModel.Commands
             else { calc = new Calculation(batch, panels); }
             calc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, HSector.Instance);
             //assign results to view model
-            MessageBox.Show("breakpoint");
             IArrangement bestArr = calc.GetBestArrangement();
             panels = bestArr.GetPanels();
             vm.Calculation.Utilisation = bestArr.Utilisation;
@@ -82,8 +92,22 @@ namespace DemoWPF.ViewModel.Commands
                 tab.Height = panel.Height;
                 tab.Width = panel.Width;
                 tab.Utilisation = panel.Utilisation;
+                //get panel drawing
+                string filename = complete + @"\"+i + ".png";
+                drawer.Draw(panel).Save(filename);
+                //MessageBox.Show(filename);
+                Uri uriFilepath = new System.Uri(filename);
+                //MessageBox.Show(uriFilepath.ToString());
+                tab.Drawing = new BitmapImage(uriFilepath);
                 vm.Tabs.Add(tab);
+                i++;
             }
+            vm.Calculation.BestPanel = bestArr.GetBestPanel().Utilisation;
+            vm.Calculation.WorstPanel = bestArr.GetWorstPanel().Utilisation;
+            vm.Calculation.TotalItems = bestArr.TotalItemsArea;
+            vm.Calculation.TotalPanels = bestArr.TotalPanelsArea;
+            vm.Calculation.ItemsArranged = bestArr.ItemsArranged;
+            vm.Calculation.Calculated = true;
         }
     }
 }

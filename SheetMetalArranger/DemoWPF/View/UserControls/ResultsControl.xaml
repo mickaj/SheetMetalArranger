@@ -56,8 +56,9 @@
                     <TextBlock Text="{Binding ElementName=this, Path=Results.ItemsLeft, Mode=OneWay}"/>
                 </WrapPanel>
                 <Button Content="{x:Static local:ResultsControlTextFile.resultsCalculate}" Margin="5,15,5,5" Command="{Binding ElementName=this, Path=CalculateCommand, Mode=OneWay}"/>
+                <Button Content="{x:Static local:ResultsControlTextFile.resultsReset}" Margin="5,15,5,5" Command="{Binding ElementName=this, Path=ResetCommand, Mode=OneWay}"/>
             </StackPanel>
-            <TabControl Grid.Column="1" ItemsSource="{Binding ElementName=this, Path=ResultsTabs, Mode=OneWay}">
+            <TabControl Grid.Column="1" ItemsSource="{Binding ElementName=this, Path=ResultsTabs, Mode=OneWay}" Background="LightGray">
                 <TabControl.Resources>
                     <DataTemplate DataType="{x:Type vms:ResultsTab}">
                         <Image Source="{Binding Drawing, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform"/>

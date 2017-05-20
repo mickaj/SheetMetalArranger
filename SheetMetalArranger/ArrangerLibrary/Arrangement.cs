@@ -27,6 +27,48 @@ namespace ArrangerLibrary
             }
         }
 
+        public int TotalPanelsArea
+        {
+            get
+            {
+                int value = 0;
+                foreach (IPanel panel in panels)
+                {
+                    value += panel.Area;
+                }
+                return value;
+            }
+        }
+
+        public int TotalItemsArea
+        {
+            get
+            {
+                int value = 0;
+                foreach (IPanel panel in panels)
+                {
+                    foreach(IAssignment assignment in panel.Assignments)
+                    {
+                        value += assignment.Value.Area;
+                    }
+                }
+                return value;
+            }
+        }
+
+        public int ItemsArranged
+        {
+            get
+            {
+                int value = 0;
+                foreach (IPanel panel in panels)
+                {
+                    value += panel.Assignments.Count;
+                }
+                return value;
+            }
+        }
+
         public List<IPanel> GetPanels()
         {
             return new List<IPanel>(panels);
@@ -70,6 +112,19 @@ namespace ArrangerLibrary
                 branch.AddPanel(panel.Copy());
             }
             return branch;
+        }
+
+        public IPanel GetBestPanel()
+        {
+            panels.Sort(PanelUtilisationComparer.Instance);
+            panels.Reverse();
+            return panels[0];
+        }
+
+        public IPanel GetWorstPanel()
+        {
+            panels.Sort(PanelUtilisationComparer.Instance);
+            return panels[0];
         }
     }
 }
