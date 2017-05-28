@@ -1,0 +1,32 @@
+﻿<Window x:Class="DemoWPF.View.ProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoWPF.View"
+        xmlns:tf="clr-namespace:DemoWPF.View.TextFiles"
+        xmlns:vms="clr-namespace:DemoWPF.ViewModel"
+        mc:Ignorable="d"
+        Title="{x:Static tf:TextFile.progressWindowTitle}"
+        Style="{StaticResource ResourceKey=progressWindow}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel  Grid.Row="0"  Margin="5">
+            <TextBlock Text="{x:Static tf:TextFile.progressWindowMessage}" FontWeight="Bold"/>
+            <WrapPanel>
+                <TextBlock Text="{x:Static tf:TextFile.progressWindowTotalItems}"/>
+                <TextBlock Text="{Binding Path=TotalItems, Mode=OneWay}"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="{x:Static tf:TextFile.progressWindowProcessedItems}"/>
+                <TextBlock Text="{Binding Path=ProcessedItems, Mode=OneWay}"/>
+            </WrapPanel>
+        </StackPanel>
+        <ProgressBar Height="20" Margin="5,10" Grid.Row="1" Maximum="{Binding Path=TotalItems, Mode=OneWay}" Minimum="0" Value="{Binding Path=ProcessedItems, Mode=OneWay}"/>
+        <Button Grid.Row="2" Content="{x:Static tf:TextFile.progressWindowSeeResults}" HorizontalAlignment="Right" Margin="5" Padding="5" IsEnabled="{Binding Finished, Mode=OneWay}" Command="{Binding Path=SeeResults}"/>
+    </Grid>
+</Window>

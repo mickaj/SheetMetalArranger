@@ -2,6 +2,9 @@
 using System.Windows.Input;
 using DemoWPF.ViewModel.Commands;
 using System.Collections.ObjectModel;
+using DemoWPF.View;
+using System.Windows;
+using System;
 
 namespace DemoWPF.ViewModel
 {
@@ -13,18 +16,6 @@ namespace DemoWPF.ViewModel
             Panels = new ObservableCollection<ListedPanel>();
             Tabs = new ObservableCollection<ResultsTab>();
             calculation = new Results();
-            //BitmapImage pic = new BitmapImage(new Uri("file://d:/test.png"));
-            //Tabs.Add(new ResultsTab { Count=0, Height = 1500, Width=3000, Utilisation=0.80, Drawing=pic });
-            //Tabs.Add(new ResultsTab { Count = 1, Height = 1250, Width = 2500, Utilisation = 0.66, Drawing = pic });
-            //Calculation = new Results();
-            //Calculation.Calculated = true;
-            //Calculation.Utilisation = 0.34;
-            //Calculation.BestPanel = 0.99;
-            //Calculation.WorstPanel = 0.0001;
-            //Calculation.TotalPanels = 100;
-            //Calculation.TotalItems = 1999;
-            //Calculation.ItemsArranged = 996;
-            //Calculation.ItemsLeft = 9;
         }
 
         #region Items
@@ -33,6 +24,8 @@ namespace DemoWPF.ViewModel
 
         #region Panels
         public ObservableCollection<ListedPanel> Panels { get; set; }
+
+        internal ProgressWindowViewModel ProgresWindowViewModel;
 
         private int newHeight = 1500;
         public int NewHeight
@@ -83,6 +76,23 @@ namespace DemoWPF.ViewModel
         public ObservableCollection<ResultsTab> Tabs { get; set; }
         #endregion
 
+        internal ProgressWindow ProgressWindow;
+
+        public void SetProgressViewModel()
+        {
+            ProgresWindowViewModel = new ProgressWindowViewModel(this);
+            ProgresWindowViewModel.Finished = false;
+            ProgresWindowViewModel.ProcessedItems = 0;
+            ProgresWindowViewModel.TotalItems = Items.Count;
+            ProgressWindow = new ProgressWindow();
+            ProgressWindow.DataContext = ProgresWindowViewModel;
+            ProgresWindowViewModel.CloseAction = new Action(ProgressWindow.Close);
+            ProgressWindow.Owner = Application.Current.MainWindow;
+            ProgressWindow.Show();
+        }
+
+
+        
         //CloseCommand definition
         private ICommand closeCommand;
 

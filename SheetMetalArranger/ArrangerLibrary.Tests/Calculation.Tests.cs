@@ -15,6 +15,8 @@ namespace ArrangerLibrary.Tests
             output = _output;
         }
 
+        private Action<int> DoNothing = delegate(int i) { /*do nothing*/ };
+
         [Fact]
         public void Test1()
         {
@@ -32,7 +34,7 @@ namespace ArrangerLibrary.Tests
             }
             input.AddItem(new Item(8, 14));
             ICalculation calc = new Calculation(input, 8, 14);
-            calc.Calculate(ItemAreaComparer.Instance, ItemWidthComparer.Instance, ItemHeightComparer.Instance, VSector.Instance);
+            calc.Calculate(ItemAreaComparer.Instance, ItemWidthComparer.Instance, ItemHeightComparer.Instance, VSector.Instance, DoNothing);
             output.WriteLine(calc.OutputBest());
         }
 
@@ -53,7 +55,7 @@ namespace ArrangerLibrary.Tests
                 input.AddItem(new Item(100, 100, margin, true));
             }
             ICalculation calc = new Calculation(input, 1500, 3000);
-            calc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, HSector.Instance);
+            calc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, HSector.Instance, DoNothing);
             output.WriteLine(calc.OutputBest());
         }
 
@@ -78,7 +80,7 @@ namespace ArrangerLibrary.Tests
                 panels.Add(new Panel(1500, 3000));
             }
             ICalculation calc = new Calculation(batch, panels);
-            calc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, HSector.Instance);
+            calc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, HSector.Instance, DoNothing);
             output.WriteLine(calc.OutputBest());
         }
 
@@ -98,7 +100,7 @@ namespace ArrangerLibrary.Tests
         {
             IBatch batch = GetRandomBatch(1500, 3000, 10, 15, 20, 30, 50);
             ICalculation calc = new Calculation(batch, 1500,3000);
-            calc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, HSector.Instance);
+            calc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, HSector.Instance, DoNothing);
             output.WriteLine(calc.OutputBest());
         }
 
@@ -112,7 +114,7 @@ namespace ArrangerLibrary.Tests
                 panels.Add(new Panel(1500, 3000));
             }
             ICalculation calc = new Calculation(batch, panels, 1000,2000);
-            calc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, HSector.Instance);
+            calc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, HSector.Instance, DoNothing);
             output.WriteLine(calc.OutputBest());
         }
 

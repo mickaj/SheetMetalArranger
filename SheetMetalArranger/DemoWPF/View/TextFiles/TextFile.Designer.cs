@@ -95,5 +95,50 @@ namespace DemoWPF.View.TextFiles {
                 return ResourceManager.GetString("menuWWW", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your setup is now being arranged....
+        /// </summary>
+        public static string progressWindowMessage {
+            get {
+                return ResourceManager.GetString("progressWindowMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processed items: .
+        /// </summary>
+        public static string progressWindowProcessedItems {
+            get {
+                return ResourceManager.GetString("progressWindowProcessedItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See results.
+        /// </summary>
+        public static string progressWindowSeeResults {
+            get {
+                return ResourceManager.GetString("progressWindowSeeResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arranging....
+        /// </summary>
+        public static string progressWindowTitle {
+            get {
+                return ResourceManager.GetString("progressWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Items in set: .
+        /// </summary>
+        public static string progressWindowTotalItems {
+            get {
+                return ResourceManager.GetString("progressWindowTotalItems", resourceCulture);
+            }
+        }
     }
 }

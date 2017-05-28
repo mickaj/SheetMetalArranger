@@ -15,4 +15,12 @@
         <Setter Property="MinHeight" Value="600"/>
         <Setter Property="MinWidth" Value="800"/>
     </Style>
+    <Style x:Key="progressWindow" TargetType="Window">
+        <Setter Property="Background" Value="Gray"/>
+        <Setter Property="Icon" Value="favicon.ico"/>
+        <Setter Property="Height" Value="180"/>
+        <Setter Property="Width" Value="350"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="ShowInTaskbar" Value="False"/>
+    </Style>
 </ResourceDictionary>

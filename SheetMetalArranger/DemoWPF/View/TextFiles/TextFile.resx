@@ -129,4 +129,19 @@
   <data name="menuWWW" xml:space="preserve">
     <value>visit mkajzer.pl</value>
   </data>
+  <data name="progressWindowMessage" xml:space="preserve">
+    <value>Your setup is now being arranged...</value>
+  </data>
+  <data name="progressWindowProcessedItems" xml:space="preserve">
+    <value>Processed items: </value>
+  </data>
+  <data name="progressWindowSeeResults" xml:space="preserve">
+    <value>See results</value>
+  </data>
+  <data name="progressWindowTitle" xml:space="preserve">
+    <value>Arranging...</value>
+  </data>
+  <data name="progressWindowTotalItems" xml:space="preserve">
+    <value>Items in set: </value>
+  </data>
 </root>

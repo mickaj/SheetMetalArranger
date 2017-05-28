@@ -13,6 +13,8 @@ namespace ArrangerLibrary
         private int defaultHeight;
         private int defaultWidth;
 
+        public delegate int ProgressNotification(int i);
+
         private readonly PossibleFitAreaComparer fitComparer = new PossibleFitAreaComparer();
 
         public Calculation(IBatch _batch, int _newHeight, int _newWidth)
@@ -59,8 +61,9 @@ namespace ArrangerLibrary
             arrangements[0].AddPanels(_panels);
         }
 
-        public void Calculate(IComparer<IItem> _item1comparer, IComparer<IItem> _item2comparer, IComparer<IItem> _item3comparer, ISector _sector)
+        public void Calculate(IComparer<IItem> _item1comparer, IComparer<IItem> _item2comparer, IComparer<IItem> _item3comparer, ISector _sector, Action<int> _notifier)
         {
+            int itemsProcessed = 0;
             IItem currentItem;
             List<PossibleFit> fits = new List<PossibleFit>();
             List<IArrangement> newArrangements = new List<IArrangement>();
@@ -118,6 +121,7 @@ namespace ArrangerLibrary
                 arrangements.AddRange(newArrangements);
                 //remove current item from input batch
                 inputBatch.RemoveItem(currentItem);
+                _notifier(++itemsProcessed);
             }
         }
 
