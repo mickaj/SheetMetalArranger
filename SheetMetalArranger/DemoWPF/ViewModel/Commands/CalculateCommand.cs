@@ -50,7 +50,7 @@ namespace DemoWPF.ViewModel.Commands
             ICalculation thisCalc = PrepareCalculation();
             vm.SetProgressViewModel();
             //creating new task for the Process method to keep the UI responsive
-            Task processTask = new Task(() => thisCalc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, HSector.Instance, vm.ProgresWindowViewModel.UpdateProgres));
+            Task processTask = new Task(() => thisCalc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, thisCalc.DefaultFactory.HSector, vm.ProgresWindowViewModel.UpdateProgres));
             processTask.Start();
             Task continueTask = processTask.ContinueWith((a) =>
             {

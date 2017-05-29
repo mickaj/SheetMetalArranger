@@ -4,7 +4,7 @@ using ArrangerLibrary.Abstractions;
 
 namespace ArrangerLibrary
 {
-    public class Panel:IPanel
+    public class Panel:FactoryBase, IPanel
     {
         private List<IBox> boxes = new List<IBox>();
         private List<IAssignment> assignments = new List<IAssignment>();
@@ -16,14 +16,14 @@ namespace ArrangerLibrary
         public int Assigned { get { return assignments.Count; } }
         public List<IAssignment> Assignments { get { return new List<IAssignment>(assignments); } }
 
-        private readonly Merger merger = new Merger();
+        private readonly IMerger merger;
 
         public double Utilisation
         {
             get
             {
                 double itemsInPanel = 0;
-                foreach(Assignment a in assignments)
+                foreach(IAssignment a in assignments)
                 {
                     itemsInPanel += a.Value.Area;
                 }
@@ -35,7 +35,7 @@ namespace ArrangerLibrary
         {
             if(boxes.Contains(_box))
             {
-                assignments.Add(new Assignment(_box, _item, _rotated));
+                assignments.Add(DefaultFactory.NewAssignment(_box, _item, _rotated));
                 boxes.AddRange(_sector.DoSection(_box, _item, _rotated));
                 boxes.Remove(_box);
                 merge();
@@ -57,7 +57,7 @@ namespace ArrangerLibrary
 
         public IPanel Copy()
         {
-            return new Panel(Height, Width, boxes, assignments);
+            return new Panel(Height, Width, boxes, assignments, DefaultFactory);
         }
 
         private void merge()
@@ -71,95 +71,27 @@ namespace ArrangerLibrary
         {
             Height = _height;
             Width = _width;
+            merger = DefaultFactory.NewMerger();
             boxes.Add(new Box(0, 0, _height, _width));
         }
 
-        private Panel(int _height, int _width, List<IBox> _boxes, List<IAssignment> _assignments)
+        public Panel(int _height, int _width, IFactory _factory)
         {
             Height = _height;
             Width = _width;
-            boxes = new List<IBox>(_boxes);
-            assignments = new List<IAssignment>(_assignments);
+            DefaultFactory = _factory;
+            merger = DefaultFactory.NewMerger();
+            boxes.Add(new Box(0, 0, _height, _width));
         }
 
-        private class Merger
+        private Panel(int _height, int _width, List<IBox> _boxes, List<IAssignment> _assignments, IFactory _factory)
         {
-            private List<IBox> input = new List<IBox>();
-            private List<IBox> output = new List<IBox>();
-
-            public List<IBox> GetMerged(List<IBox> _list)
-            {
-                input.Clear();
-                input.AddRange(_list);
-                output.Clear();
-                bool extended;
-                do
-                {
-                    extended = false;
-                    foreach (IBox cnt in _list)
-                    {
-                        if (extend(cnt))
-                        {
-                            extended = true;
-                        };
-                    }
-                } while (extended);
-                output.AddRange(input);
-                return output;
-            }
-
-            private bool extend(IBox _container)
-            {
-                bool extended = false;
-                List<IBox> buffer = new List<IBox>();
-                buffer.AddRange(input);
-                buffer.Remove(_container);
-                int i = 0;
-                while ((i < buffer.Count) && (extended == false))
-                {
-                    if (adjacentHorizontal(_container, buffer[i]))
-                    {
-                        output.Add(mergeHorizontal(_container, buffer[i]));
-                        input.Remove(_container);
-                        input.Remove(buffer[i]);
-                        extended = true;
-                    }
-
-                    if (adjacentVertical(_container, buffer[i]))
-                    {
-                        output.Add(mergeVertical(_container, buffer[i]));
-                        input.Remove(_container);
-                        input.Remove(buffer[i]);
-                        extended = true;
-                    }
-                    i++;
-                }
-                return extended;
-            }
-
-            private bool adjacentHorizontal(IBox _ext1, IBox _ext2)
-            {
-                if ((_ext1.Height == _ext2.Height) && (_ext2.PosY == _ext1.PosY) && (_ext2.PosX == _ext1.PosX + _ext1.Width))
-                { return true; }
-                return false;
-            }
-
-            private bool adjacentVertical(IBox _ext1, IBox _ext2)
-            {
-                if ((_ext1.Width == _ext2.Width) && (_ext2.PosX == _ext1.PosX) && (_ext2.PosY == _ext1.PosY + _ext1.Height))
-                { return true; }
-                return false;
-            }
-
-            private IBox mergeHorizontal(IBox _mrg1, IBox _mrg2)
-            {
-                return new Box(_mrg1.PosX, _mrg1.PosY, _mrg1.Height, _mrg1.Width + _mrg2.Width);
-            }
-
-            private IBox mergeVertical(IBox _mrg1, IBox _mrg2)
-            {
-                return new Box(_mrg1.PosX, _mrg1.PosY, _mrg1.Height + _mrg2.Height, _mrg1.Width);
-            }
+            Height = _height;
+            Width = _width;
+            DefaultFactory = _factory;
+            merger = DefaultFactory.NewMerger();
+            boxes = new List<IBox>(_boxes);
+            assignments = new List<IAssignment>(_assignments);
         }
     }
 }

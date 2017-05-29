@@ -6,19 +6,6 @@ namespace ArrangerLibrary
 {
     public sealed class HSector : ISector
     {
-        private static readonly HSector instance = new HSector();
-
-        private HSector()
-        { }
-
-        static HSector()
-        { }
-
-        public static HSector Instance
-        {
-            get { return instance; }
-        }
-
         public List<IBox> DoSection(IBox _container, IItem _item, bool _rotated)
         {
             if (_rotated) { return sectionRotated(_container, _item); }
@@ -78,19 +65,6 @@ namespace ArrangerLibrary
 
     public sealed class VSector : ISector
     {
-        private static readonly VSector instance = new VSector();
-
-        private VSector()
-        { }
-
-        static VSector()
-        { }
-
-        public static VSector Instance
-        {
-            get { return instance; }
-        }
-
         public List<IBox> DoSection(IBox _container, IItem _item, bool _rotated)
         {
             if(_rotated) { return sectionRotated(_container, _item); }

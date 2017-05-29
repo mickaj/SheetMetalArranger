@@ -18,7 +18,7 @@ namespace ArrangerLibrary
                 foreach (IPanel panel in panels)
                 {
                     totalArea += panel.Area;
-                    foreach (Assignment asg in panel.Assignments)
+                    foreach (IAssignment asg in panel.Assignments)
                     {
                         totalItems += asg.Value.Area;
                     }

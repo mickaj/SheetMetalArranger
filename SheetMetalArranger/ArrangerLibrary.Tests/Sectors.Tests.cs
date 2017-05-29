@@ -6,7 +6,7 @@ using Xunit.Abstractions;
 
 namespace ArrangerLibrary.Tests
 {
-    public class SectorsTests
+    public class SectorsTests : FactoryBase
     {
         private readonly ITestOutputHelper output;
 
@@ -26,9 +26,9 @@ namespace ArrangerLibrary.Tests
         {
             IBox cnt = new Box(10, 10, 6, 10);
             IItem itm = new Item(6, 10);
-            List<IBox> resultH = execute(cnt, itm, HSector.Instance);
+            List<IBox> resultH = execute(cnt, itm, DefaultFactory.HSector);
             Assert.Equal(0, resultH.Count);
-            List<IBox> resultV = execute(cnt, itm, VSector.Instance);
+            List<IBox> resultV = execute(cnt, itm, DefaultFactory.VSector);
             Assert.Equal(0, resultV.Count);
         }
 
@@ -41,8 +41,8 @@ namespace ArrangerLibrary.Tests
             IBox resultH2 = new Box(16, 10, 3, 2);
             IBox resultV1 = new Box(10, 13, 2, 6);
             IBox resultV2 = new Box(16, 10, 5, 2);
-            List<IBox> resultH = execute(cnt, itm, HSector.Instance);
-            List<IBox> resultV = execute(cnt, itm, VSector.Instance);
+            List<IBox> resultH = execute(cnt, itm, DefaultFactory.HSector);
+            List<IBox> resultV = execute(cnt, itm, DefaultFactory.VSector);
             Assert.Contains<IBox>(resultH1, resultH, BoxEquality.Instance);
             Assert.Contains<IBox>(resultH2, resultH, BoxEquality.Instance);
             Assert.Equal(2, resultH.Count);
@@ -57,8 +57,8 @@ namespace ArrangerLibrary.Tests
             IBox cnt = new Box(10, 10, 5, 8);
             IItem itm = new Item(5, 6);
             IBox result = new Box(16, 10, 5, 2);
-            List<IBox> resultV = execute(cnt, itm, VSector.Instance);
-            List<IBox> resultH = execute(cnt, itm, HSector.Instance);
+            List<IBox> resultV = execute(cnt, itm, DefaultFactory.VSector);
+            List<IBox> resultH = execute(cnt, itm, DefaultFactory.HSector);
             Assert.Contains<IBox>(result, resultV, BoxEquality.Instance);
             Assert.Contains<IBox>(result, resultH, BoxEquality.Instance);
             Assert.Equal(1, resultV.Count);
@@ -74,8 +74,8 @@ namespace ArrangerLibrary.Tests
             IBox resultV2 = new Box(11, 10, 10, 9);
             IBox resultH1 = new Box(10, 11, 9, 10);
             IBox resultH2 = new Box(11, 10, 1, 9);
-            List<IBox> resultV = execute(cnt, itm, VSector.Instance);
-            List<IBox> resultH = execute(cnt, itm, HSector.Instance);
+            List<IBox> resultV = execute(cnt, itm, DefaultFactory.VSector);
+            List<IBox> resultH = execute(cnt, itm, DefaultFactory.HSector);
             Assert.Contains<IBox>(resultV1, resultV, BoxEquality.Instance);
             Assert.Contains<IBox>(resultV2, resultV, BoxEquality.Instance);
             Assert.Equal(2, resultV.Count);

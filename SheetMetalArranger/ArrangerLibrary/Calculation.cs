@@ -4,7 +4,7 @@ using ArrangerLibrary.Abstractions;
 
 namespace ArrangerLibrary
 {
-    public class Calculation : ICalculation
+    public class Calculation : FactoryBase, ICalculation
     {
         private IBatch inputBatch;
         private List<IArrangement> arrangements;

@@ -9,5 +9,7 @@ namespace ArrangerLibrary.Abstractions
         string OutputString();
         string OutputBest();
         IArrangement GetBestArrangement();
+
+        IFactory DefaultFactory { get; }
     }
 }

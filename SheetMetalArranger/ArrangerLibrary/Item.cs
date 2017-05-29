@@ -50,7 +50,7 @@ namespace ArrangerLibrary
 
         public IItem CreateCopy()
         {
-            Item copy = new Item(ItemHeight, ItemWidth, Margin, Rotatable);
+            IItem copy = new Item(ItemHeight, ItemWidth, Margin, Rotatable);
             return copy;
         }
     }
