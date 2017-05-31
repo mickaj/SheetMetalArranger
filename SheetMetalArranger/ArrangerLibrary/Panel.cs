@@ -72,7 +72,7 @@ namespace ArrangerLibrary
             Height = _height;
             Width = _width;
             merger = DefaultFactory.NewMerger();
-            boxes.Add(new Box(0, 0, _height, _width));
+            boxes.Add(DefaultFactory.NewBox(0,0,_height, _width));
         }
 
         public Panel(int _height, int _width, IFactory _factory)
@@ -81,7 +81,7 @@ namespace ArrangerLibrary
             Width = _width;
             DefaultFactory = _factory;
             merger = DefaultFactory.NewMerger();
-            boxes.Add(new Box(0, 0, _height, _width));
+            boxes.Add(DefaultFactory.NewBox(0, 0, _height, _width));
         }
 
         private Panel(int _height, int _width, List<IBox> _boxes, List<IAssignment> _assignments, IFactory _factory)

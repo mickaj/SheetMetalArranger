@@ -13,8 +13,6 @@ namespace ArrangerLibrary
         private int defaultHeight;
         private int defaultWidth;
 
-        public delegate int ProgressNotification(int i);
-
         private readonly PossibleFitAreaComparer fitComparer = new PossibleFitAreaComparer();
 
         public Calculation(IBatch _batch, int _newHeight, int _newWidth)
@@ -24,8 +22,8 @@ namespace ArrangerLibrary
             allowNewPanels = true;
             defaultHeight = _newHeight;
             defaultWidth = _newWidth;
-            arrangements.Add(new Arrangement());
-            arrangements[0].AddPanel(new Panel(defaultHeight, defaultWidth));
+            arrangements.Add(DefaultFactory.NewArrangement());
+            arrangements[0].AddPanel(DefaultFactory.NewPanel(defaultHeight, defaultWidth));
         }
 
         public Calculation(IBatch _batch, IPanel _defaultPanel)
@@ -35,8 +33,8 @@ namespace ArrangerLibrary
             allowNewPanels = true;
             defaultHeight = _defaultPanel.Height;
             defaultWidth = _defaultPanel.Width;
-            arrangements.Add(new Arrangement());
-            arrangements[0].AddPanel(new Panel(defaultHeight, defaultWidth));
+            arrangements.Add(DefaultFactory.NewArrangement());
+            arrangements[0].AddPanel(DefaultFactory.NewPanel(defaultHeight, defaultWidth));
         }
 
         public Calculation(IBatch _batch, List<IPanel> _panels)
@@ -46,7 +44,7 @@ namespace ArrangerLibrary
             allowNewPanels = false;
             defaultHeight = 0;
             defaultWidth = 0;
-            arrangements.Add(new Arrangement());
+            arrangements.Add(DefaultFactory.NewArrangement());
             arrangements[0].AddPanels(_panels);
         }
 
@@ -57,7 +55,7 @@ namespace ArrangerLibrary
             allowNewPanels = true;
             defaultHeight = _newHeight;
             defaultWidth = _newWidth;
-            arrangements.Add(new Arrangement());
+            arrangements.Add(DefaultFactory.NewArrangement());
             arrangements[0].AddPanels(_panels);
         }
 
@@ -102,10 +100,10 @@ namespace ArrangerLibrary
                     else
                     {
                         // if it is allowed to create new panles and new panel would hold the item
-                        IBox tempBox = new Box(0, 0, defaultHeight, defaultWidth);
+                        IBox tempBox = DefaultFactory.NewBox(0, 0, defaultHeight, defaultWidth);
                         if ((allowNewPanels)&&(tempBox.CanHold(currentItem)>0))
                         {
-                            IPanel newPanel = new Panel(defaultHeight, defaultWidth);
+                            IPanel newPanel = DefaultFactory.NewPanel(defaultHeight, defaultWidth);
                             if(tempBox.CanHold(currentItem)==1) { newPanel.Assign(newPanel.GetBox(0), currentItem, _sector, false); }
                             if(tempBox.CanHold(currentItem)==2) { newPanel.Assign(newPanel.GetBox(0), currentItem, _sector, true); }
                             currentArrangement.AddPanel(newPanel);
@@ -136,7 +134,7 @@ namespace ArrangerLibrary
                 foreach(IPanel pnl in arr.GetPanels())
                 {
                     output += String.Format("---Panel no: {0}({1})\n", panelNo, pnl.Utilisation);
-                    foreach (Assignment asg in pnl.Assignments)
+                    foreach (IAssignment asg in pnl.Assignments)
                     {
                         output += String.Format("Height={0}; Width={1}; PosX={2}; PosY={3}; Rotated={4}\n", asg.Value.Height, asg.Value.Width, asg.Key.PosX, asg.Key.PosY, asg.Rotated);
                     }
@@ -155,7 +153,7 @@ namespace ArrangerLibrary
         public string OutputBest()
         {
             string output = "BEST RESULT: \n";
-            arrangements.Sort(ArrangementRatioComparer.Instance);
+            arrangements.Sort(DefaultFactory.ArrangementRatioComparer);
             IArrangement arr = arrangements[0];
             int panelNo = 1;
             output += String.Format("--------------------------------------\n***Utilisation: {0}***\n",arr.Utilisation);
@@ -178,7 +176,7 @@ namespace ArrangerLibrary
 
         public IArrangement GetBestArrangement()
         {
-            arrangements.Sort(ArrangementRatioComparer.Instance);
+            arrangements.Sort(DefaultFactory.ArrangementRatioComparer);
             return arrangements[0];
         }
 

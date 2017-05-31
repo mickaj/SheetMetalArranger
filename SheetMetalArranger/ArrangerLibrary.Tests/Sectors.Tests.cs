@@ -43,11 +43,11 @@ namespace ArrangerLibrary.Tests
             IBox resultV2 = new Box(16, 10, 5, 2);
             List<IBox> resultH = execute(cnt, itm, DefaultFactory.HSector);
             List<IBox> resultV = execute(cnt, itm, DefaultFactory.VSector);
-            Assert.Contains<IBox>(resultH1, resultH, BoxEquality.Instance);
-            Assert.Contains<IBox>(resultH2, resultH, BoxEquality.Instance);
+            Assert.Contains<IBox>(resultH1, resultH, DefaultFactory.BoxEqualityComparer);
+            Assert.Contains<IBox>(resultH2, resultH, DefaultFactory.BoxEqualityComparer);
             Assert.Equal(2, resultH.Count);
-            Assert.Contains<IBox>(resultV1, resultV, BoxEquality.Instance);
-            Assert.Contains<IBox>(resultV2, resultV, BoxEquality.Instance);
+            Assert.Contains<IBox>(resultV1, resultV, DefaultFactory.BoxEqualityComparer);
+            Assert.Contains<IBox>(resultV2, resultV, DefaultFactory.BoxEqualityComparer);
             Assert.Equal(2, resultV.Count);
         }
 
@@ -59,8 +59,8 @@ namespace ArrangerLibrary.Tests
             IBox result = new Box(16, 10, 5, 2);
             List<IBox> resultV = execute(cnt, itm, DefaultFactory.VSector);
             List<IBox> resultH = execute(cnt, itm, DefaultFactory.HSector);
-            Assert.Contains<IBox>(result, resultV, BoxEquality.Instance);
-            Assert.Contains<IBox>(result, resultH, BoxEquality.Instance);
+            Assert.Contains<IBox>(result, resultV, DefaultFactory.BoxEqualityComparer);
+            Assert.Contains<IBox>(result, resultH, DefaultFactory.BoxEqualityComparer);
             Assert.Equal(1, resultV.Count);
             Assert.Equal(1, resultH.Count);
         }
@@ -76,11 +76,11 @@ namespace ArrangerLibrary.Tests
             IBox resultH2 = new Box(11, 10, 1, 9);
             List<IBox> resultV = execute(cnt, itm, DefaultFactory.VSector);
             List<IBox> resultH = execute(cnt, itm, DefaultFactory.HSector);
-            Assert.Contains<IBox>(resultV1, resultV, BoxEquality.Instance);
-            Assert.Contains<IBox>(resultV2, resultV, BoxEquality.Instance);
+            Assert.Contains<IBox>(resultV1, resultV, DefaultFactory.BoxEqualityComparer);
+            Assert.Contains<IBox>(resultV2, resultV, DefaultFactory.BoxEqualityComparer);
             Assert.Equal(2, resultV.Count);
-            Assert.Contains<IBox>(resultH1, resultH, BoxEquality.Instance);
-            Assert.Contains<IBox>(resultH2, resultH, BoxEquality.Instance);
+            Assert.Contains<IBox>(resultH1, resultH, DefaultFactory.BoxEqualityComparer);
+            Assert.Contains<IBox>(resultH2, resultH, DefaultFactory.BoxEqualityComparer);
             Assert.Equal(2, resultH.Count);
         }
 

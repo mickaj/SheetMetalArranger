@@ -4,10 +4,18 @@ using ArrangerLibrary.Abstractions;
 
 namespace ArrangerLibrary
 {
-    public class Arrangement : IArrangement
+    public class Arrangement : FactoryBase, IArrangement
     {
         private List<IPanel> panels = new List<IPanel>();
         private List<IItem> leftItems = new List<IItem>();
+
+        public Arrangement()
+        { }
+
+        public Arrangement(IFactory _factory)
+        {
+            DefaultFactory = _factory;
+        }
 
         public double Utilisation
         {
@@ -116,14 +124,14 @@ namespace ArrangerLibrary
 
         public IPanel GetBestPanel()
         {
-            panels.Sort(PanelUtilisationComparer.Instance);
+            panels.Sort(DefaultFactory.PanelComparer);
             panels.Reverse();
             return panels[0];
         }
 
         public IPanel GetWorstPanel()
         {
-            panels.Sort(PanelUtilisationComparer.Instance);
+            panels.Sort(DefaultFactory.PanelComparer);
             return panels[0];
         }
     }

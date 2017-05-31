@@ -5,19 +5,6 @@ namespace ArrangerLibrary
 {
     public sealed class BoxHeightComparer : IComparer<IBox>
     {
-        private static readonly BoxHeightComparer instance = new BoxHeightComparer();
-
-        private BoxHeightComparer()
-        { }
-
-        static BoxHeightComparer()
-        { }
-
-        public static BoxHeightComparer Instance
-        {
-            get { return instance; }
-        }
-
         public int Compare(IBox _item1, IBox _item2)
         {
             if (_item1 == null)
@@ -35,19 +22,6 @@ namespace ArrangerLibrary
 
     public sealed class BoxWidthComparer : IComparer<IBox>
     {
-        private static readonly BoxWidthComparer instance = new BoxWidthComparer();
-
-        private BoxWidthComparer()
-        { }
-
-        static BoxWidthComparer()
-        { }
-
-        public static BoxWidthComparer Instance
-        {
-            get { return instance; }
-        }
-
         public int Compare(IBox _item1, IBox _item2)
         {
             if (_item1 == null)
@@ -65,19 +39,6 @@ namespace ArrangerLibrary
 
     public sealed class BoxAreaComparer : IComparer<IBox>
     {
-        private static readonly BoxAreaComparer instance = new BoxAreaComparer();
-
-        private BoxAreaComparer()
-        { }
-
-        static BoxAreaComparer()
-        { }
-
-        public static BoxAreaComparer Instance
-        {
-            get { return instance; }
-        }
-
         public int Compare(IBox _item1, IBox _item2)
         {
             if (_item1 == null)
@@ -95,19 +56,6 @@ namespace ArrangerLibrary
 
     public sealed class BoxEquality : IEqualityComparer<IBox>
     {
-        private static readonly BoxEquality instance = new BoxEquality();
-
-        private BoxEquality()
-        { }
-
-        static BoxEquality()
-        { }
-
-        public static BoxEquality Instance
-        {
-            get { return instance; }
-        }
-
         public bool Equals(IBox x, IBox y)
         {
             if ((x.Height == y.Height)

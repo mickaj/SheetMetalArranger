@@ -29,7 +29,7 @@ namespace ArrangerLibrary.Tests
             panel = new Panel(1000, 2000);
             IBox boxFromPanel = panel.GetBox(0);
             IBox expectedBox = new Box(0, 0, 1000, 2000);
-            Assert.Equal(expectedBox, boxFromPanel, BoxEquality.Instance);
+            Assert.Equal(expectedBox, boxFromPanel, DefaultFactory.BoxEqualityComparer);
         }
 
         [Fact]

@@ -9,19 +9,6 @@ namespace ArrangerLibrary
 {
     public sealed class PanelUtilisationComparer : IComparer<IPanel>
     {
-        private static readonly PanelUtilisationComparer instance = new PanelUtilisationComparer();
-
-        private PanelUtilisationComparer()
-        { }
-
-        static PanelUtilisationComparer()
-        { }
-
-        public static PanelUtilisationComparer Instance
-        {
-            get { return instance; }
-        }
-
         public int Compare(IPanel _panel1, IPanel _panel2)
         {
             if (_panel1 == null)

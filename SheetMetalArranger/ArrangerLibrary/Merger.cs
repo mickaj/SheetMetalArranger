@@ -3,10 +3,18 @@ using ArrangerLibrary.Abstractions;
 
 namespace ArrangerLibrary
 {
-    public class Merger : IMerger
+    public class Merger : FactoryBase, IMerger
     {
         private List<IBox> input = new List<IBox>();
         private List<IBox> output = new List<IBox>();
+
+        public Merger()
+        { }
+
+        public Merger(IFactory _factory)
+        {
+            DefaultFactory = _factory;
+        }
 
         public List<IBox> GetMerged(List<IBox> _list)
         {
@@ -74,12 +82,12 @@ namespace ArrangerLibrary
 
         private IBox mergeHorizontal(IBox _mrg1, IBox _mrg2)
         {
-            return new Box(_mrg1.PosX, _mrg1.PosY, _mrg1.Height, _mrg1.Width + _mrg2.Width);
+            return DefaultFactory.NewBox(_mrg1.PosX, _mrg1.PosY, _mrg1.Height, _mrg1.Width + _mrg2.Width);
         }
 
         private IBox mergeVertical(IBox _mrg1, IBox _mrg2)
         {
-            return new Box(_mrg1.PosX, _mrg1.PosY, _mrg1.Height + _mrg2.Height, _mrg1.Width);
+            return DefaultFactory.NewBox(_mrg1.PosX, _mrg1.PosY, _mrg1.Height + _mrg2.Height, _mrg1.Width);
         }
     }
 }
