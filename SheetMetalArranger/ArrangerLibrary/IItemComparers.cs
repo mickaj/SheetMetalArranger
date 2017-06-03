@@ -5,19 +5,6 @@ namespace ArrangerLibrary
 {
     public sealed class ItemHeightComparer : IComparer<IItem>
     {
-        private static readonly ItemHeightComparer instance = new ItemHeightComparer();
-
-        private ItemHeightComparer()
-        { }
-
-        static ItemHeightComparer()
-        { }
-
-        public static ItemHeightComparer Instance
-        {
-            get { return instance; }
-        }
-
         public int Compare(IItem _item1, IItem _item2)
         {
             if (_item1 == null)
@@ -35,19 +22,6 @@ namespace ArrangerLibrary
 
     public sealed class ItemWidthComparer : IComparer<IItem>
     {
-        private static readonly ItemWidthComparer instance = new ItemWidthComparer();
-
-        private ItemWidthComparer()
-        { }
-
-        static ItemWidthComparer()
-        { }
-
-        public static ItemWidthComparer Instance
-        {
-            get { return instance; }
-        }
-
         public int Compare(IItem _item1, IItem _item2)
         {
             if (_item1 == null)
@@ -65,19 +39,6 @@ namespace ArrangerLibrary
 
     public sealed class ItemAreaComparer : IComparer<IItem>
     {
-        private static readonly ItemAreaComparer instance = new ItemAreaComparer();
-
-        private ItemAreaComparer()
-        { }
-
-        static ItemAreaComparer()
-        { }
-
-        public static ItemAreaComparer Instance
-        {
-            get { return instance; }
-        }
-
         public int Compare(IItem _item1, IItem _item2)
         {
             if (_item1 == null)
@@ -95,22 +56,6 @@ namespace ArrangerLibrary
 
     public sealed class ItemEquality : IEqualityComparer<IItem>
     {
-        private static readonly ItemEquality instance = new ItemEquality();
-
-        private ItemEquality()
-        { }
-
-        static ItemEquality()
-        { }
-
-        public static ItemEquality Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-
         public bool Equals(IItem x, IItem y)
         {
             if ((x.Height == y.Height)

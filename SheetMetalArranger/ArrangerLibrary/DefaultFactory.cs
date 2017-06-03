@@ -16,6 +16,10 @@ namespace ArrangerLibrary
         private readonly IComparer<IBox> boxWidthComparer = new BoxWidthComparer();
         private readonly IComparer<IBox> boxAreaComparer = new BoxAreaComparer();
         private readonly IEqualityComparer<IBox> boxEqualityComparer = new BoxEquality();
+        private readonly IComparer<IItem> itemHeightComparer = new ItemHeightComparer();
+        private readonly IComparer<IItem> itemWidthComparer = new ItemWidthComparer();
+        private readonly IComparer<IItem> itemAreaComparer = new ItemAreaComparer();
+        private readonly IEqualityComparer<IItem> itemEqualityComparer = new ItemEquality();
         private readonly IComparer<IArrangement> arrangementComparer = new ArrangementRatioComparer();
 
         public IMerger NewMerger()
@@ -68,6 +72,26 @@ namespace ArrangerLibrary
             get { return boxEqualityComparer; }
         }
 
+        public IComparer<IItem> ItemWidthComparer
+        {
+            get { return itemWidthComparer; }
+        }
+
+        public IComparer<IItem> ItemHeightComparer
+        {
+            get { return itemHeightComparer; }
+        }
+
+        public IComparer<IItem> ItemAreaComparer
+        {
+            get { return itemAreaComparer; }
+        }
+
+        public IEqualityComparer<IItem> ItemEqualityComparer
+        {
+            get { return itemEqualityComparer; }
+        }
+
         public IComparer<IArrangement> ArrangementRatioComparer
         {
             get { return arrangementComparer; }
@@ -96,6 +120,48 @@ namespace ArrangerLibrary
         public IPanel NewPanel(int _h, int _w, IFactory _factory)
         {
             return new Panel(_h, _w, _factory);
+        }
+
+        public IItem NewItem(int _height, int _width, int _margin, bool _rotation)
+        {
+            return new Item(_height, _width, _margin, _rotation);
+        }
+
+        public IItem NewItem(int _height, int _width, int _margin)
+        {
+            return new Item(_height, _width, _margin);
+        }
+
+        public IItem NewItem(int _height, int _width)
+        {
+            return new Item(_height, _width);
+        }
+
+        public IBatch NewBatch()
+        {
+            return new Batch();
+        }
+
+        public IBatch NewBatch(List<IItem> _items)
+        {
+            return new Batch(_items);
+        }
+
+        public ICalculation NewCalculation(IBatch _batch, int _newHeight, int _newWidth)
+        {
+            return new Calculation(_batch, _newHeight, _newWidth);
+        }
+        public ICalculation NewCalculation(IBatch _batch, IPanel _defaultPanel)
+        {
+            return new Calculation(_batch, _defaultPanel);
+        }
+        public ICalculation NewCalculation(IBatch _batch, List<IPanel> _panels)
+        {
+            return new Calculation(_batch, _panels);
+        }
+        public ICalculation NewCalculation(IBatch _batch, List<IPanel> _panels, int _newHeight, int _newWidth)
+        {
+            return new Calculation(_batch, _panels, _newHeight, _newWidth);
         }
     }
 }

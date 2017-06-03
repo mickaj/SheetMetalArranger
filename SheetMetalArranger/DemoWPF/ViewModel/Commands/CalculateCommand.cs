@@ -15,6 +15,7 @@ namespace DemoWPF.ViewModel.Commands
 {
     public class CalculateCommand : ICommand
     {
+        private IFactory factory = new DefaultFactory();
         private readonly MainWindowViewModel vm;
         public event EventHandler CanExecuteChanged
         {
@@ -50,7 +51,7 @@ namespace DemoWPF.ViewModel.Commands
             ICalculation thisCalc = PrepareCalculation();
             vm.SetProgressViewModel();
             //creating new task for the Process method to keep the UI responsive
-            Task processTask = new Task(() => thisCalc.Calculate(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance, thisCalc.DefaultFactory.HSector, vm.ProgresWindowViewModel.UpdateProgres));
+            Task processTask = new Task(() => thisCalc.Calculate(factory.ItemAreaComparer, factory.ItemHeightComparer, factory.ItemWidthComparer, thisCalc.DefaultFactory.HSector, vm.ProgresWindowViewModel.UpdateProgres));
             processTask.Start();
             Task continueTask = processTask.ContinueWith((a) =>
             {
@@ -72,24 +73,24 @@ namespace DemoWPF.ViewModel.Commands
             List<IItem> items = new List<IItem>();
             foreach(ListedItem li in vm.Items)
             {
-                items.Add(new Item(li.Height, li.Width, li.Margin, li.Rotation));
+                items.Add(factory.NewItem(li.Height, li.Width, li.Margin, li.Rotation));
             }
             //generate ArrangerLibrary.Batch
-            IBatch batch = new Batch(items);
+            IBatch batch = factory.NewBatch(items);
             //generate panels
             List<IPanel> panels = new List<IPanel>();
-            if(vm.Panels.Count == 0) { panels.Add(new Panel(vm.NewHeight, vm.NewWidth)); }
+            if(vm.Panels.Count == 0) { panels.Add(factory.NewPanel(vm.NewHeight, vm.NewWidth)); }
             else
             {
                 foreach (ListedPanel lp in vm.Panels)
                 {
-                    for (int qty = 1; qty<= lp.QTY; qty++) { panels.Add(new Panel(lp.Height, lp.Width)); }
+                    for (int qty = 1; qty<= lp.QTY; qty++) { panels.Add(factory.NewPanel(lp.Height, lp.Width)); }
                 }
             }
             //create calculation
             ICalculation calc;
-            if (vm.AllowNew) { calc = new Calculation(batch, panels, vm.NewHeight, vm.NewWidth); }
-            else { calc = new Calculation(batch, panels); }
+            if (vm.AllowNew) { calc = factory.NewCalculation(batch, panels, vm.NewHeight, vm.NewWidth); }
+            else { calc = factory.NewCalculation(batch, panels); }
             return calc;
         }
     }

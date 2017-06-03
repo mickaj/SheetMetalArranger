@@ -3,7 +3,7 @@ using Xunit.Abstractions;
 
 namespace ArrangerLibrary.Tests
 {
-    public class ItemComparersTests
+    public class ItemComparersTests:FactoryBase
     {
         private readonly ITestOutputHelper output;
 
@@ -17,7 +17,7 @@ namespace ArrangerLibrary.Tests
 
         private void execute(Item _item1, Item _item2, int _expected)
         {
-            int result = ItemHeightComparer.Instance.Compare(_item1, _item2);
+            int result = DefaultFactory.ItemHeightComparer.Compare(_item1, _item2);
             Assert.Equal(_expected, result);
             output.WriteLine("Result: {0}", result);
         }

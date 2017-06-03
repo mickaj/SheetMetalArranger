@@ -5,7 +5,7 @@ using ArrangerLibrary.Abstractions;
 
 namespace ArrangerLibrary.Tests
 {
-    public class BatchTests
+    public class BatchTests:FactoryBase
     {
         private readonly ITestOutputHelper output;
 
@@ -49,9 +49,9 @@ namespace ArrangerLibrary.Tests
         public void SortAHW()
         {
             PrepareSortingTest();
-            IItem results = batch.GetFirst(ItemAreaComparer.Instance, ItemHeightComparer.Instance, ItemWidthComparer.Instance);
+            IItem results = batch.GetFirst(DefaultFactory.ItemAreaComparer, DefaultFactory.ItemHeightComparer,DefaultFactory.ItemWidthComparer);
             Item expected = new Item(3, 6, 0, false);
-            Assert.Equal(expected, results, ItemEquality.Instance);
+            Assert.Equal(expected, results, DefaultFactory.ItemEqualityComparer);
             PrintBatch(batch.Content());
         }
 
@@ -59,9 +59,9 @@ namespace ArrangerLibrary.Tests
         public void SortAWH()
         {
             PrepareSortingTest();
-            IItem results = batch.GetFirst(ItemAreaComparer.Instance, ItemWidthComparer.Instance, ItemHeightComparer.Instance);
+            IItem results = batch.GetFirst(DefaultFactory.ItemAreaComparer, DefaultFactory.ItemWidthComparer, DefaultFactory.ItemHeightComparer);
             Item expected = new Item(3, 6, 0, false);
-            Assert.Equal(expected, results, ItemEquality.Instance);
+            Assert.Equal(expected, results, DefaultFactory.ItemEqualityComparer);
             PrintBatch(batch.Content());
         }
 
@@ -69,39 +69,9 @@ namespace ArrangerLibrary.Tests
         public void SortHWA()
         {
             PrepareSortingTest();
-            IItem results = batch.GetFirst(ItemAreaComparer.Instance, ItemWidthComparer.Instance, ItemHeightComparer.Instance);
+            IItem results = batch.GetFirst(DefaultFactory.ItemAreaComparer, DefaultFactory.ItemWidthComparer, DefaultFactory.ItemHeightComparer);
             Item expected = new Item(3, 6, 0, false);
-            Assert.Equal(expected, results, ItemEquality.Instance);
-            PrintBatch(batch.Content());
-        }
-
-        [Fact]
-        public void SortHAW()
-        {
-            PrepareSortingTest();
-            IItem results = batch.GetFirst(ItemAreaComparer.Instance, ItemWidthComparer.Instance, ItemHeightComparer.Instance);
-            Item expected = new Item(3, 6, 0, false);
-            Assert.Equal(expected, results, ItemEquality.Instance);
-            PrintBatch(batch.Content());
-        }
-
-        [Fact]
-        public void SortWHA()
-        {
-            PrepareSortingTest();
-            IItem results = batch.GetFirst(ItemAreaComparer.Instance, ItemWidthComparer.Instance, ItemHeightComparer.Instance);
-            Item expected = new Item(3, 6, 0, false);
-            Assert.Equal(expected, results, ItemEquality.Instance);
-            PrintBatch(batch.Content());
-        }
-
-        [Fact]
-        public void SortWAH()
-        {
-            PrepareSortingTest();
-            IItem results = batch.GetFirst(ItemAreaComparer.Instance, ItemWidthComparer.Instance, ItemHeightComparer.Instance);
-            Item expected = new Item(3, 6, 0, false);
-            Assert.Equal(expected, results, ItemEquality.Instance);
+            Assert.Equal(expected, results, DefaultFactory.ItemEqualityComparer);
             PrintBatch(batch.Content());
         }
 
